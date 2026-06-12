@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>Cloud Computing | Verde Bandera & Azul Tecnología</title>
     <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --verde-bandera: #006847;
+            --verde-brillante: #00ff88;
+            --azul-tech: #0088ff;
+            --azul-oscuro: #001a33;
+            --cyan: #00ccff;
+            --dorado: #ffd700;
+            --glass: rgba(0, 30, 60, 0.7);
+            --glass-light: rgba(0, 50, 80, 0.5);
+            --neon-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,13 +28,70 @@
         }
 
         body {
-            background: #0a1a2e;
-            background-image: radial-gradient(circle at 10% 20%, #0d2b4a, #061220);
+            background: var(--azul-oscuro);
             font-family: 'Inter', sans-serif;
-            color: #e2f0e3;
+            color: #e0f0ff;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            will-change: scroll-position;
+        }
+
+        /* ===== OPTIMIZACIÓN PARA DISPOSITIVOS DE GAMA BAJA ===== */
+        @media (max-width: 768px) {
+            .tech-ray { animation-duration: 15s !important; }
+            .floating-bg-img { animation-duration: 25s !important; }
+            .floating-leaf { animation-duration: 18s !important; }
+        }
+
+        /* ===== INTRO ANIMATION ===== */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--azul-oscuro);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: introFadeOut 0.8s ease-in-out 2.5s forwards;
+            pointer-events: none;
+        }
+        .intro-content {
+            text-align: center;
+            animation: introScaleIn 1.5s ease-out;
+        }
+        .intro-logo {
+            font-size: 5rem;
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: introPulse 0.5s ease-in-out infinite alternate;
+        }
+        .intro-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #fff, var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 1rem;
+            letter-spacing: 3px;
+        }
+        @keyframes introFadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+        @keyframes introScaleIn {
+            from { transform: scale(0.3); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes introPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
         }
 
         /* ===== IMÁGENES DE FONDO FLOTANTES ===== */
@@ -38,41 +108,31 @@
         .floating-bg-img {
             position: absolute;
             border-radius: 20px;
-            opacity: 0.12;
-            filter: brightness(0.9) saturate(1.3);
-            animation: floatBgImage 20s infinite ease-in-out;
+            opacity: 0.08;
+            filter: brightness(0.7) saturate(1.3);
+            animation: floatBgImage 25s infinite ease-in-out;
+            will-change: transform;
         }
         .floating-bg-img:nth-child(1) {
-            top: 10%;
-            left: 5%;
-            width: 400px;
-            height: 300px;
-            animation-delay: 0s;
+            top: 5%;
+            left: 3%;
+            width: 350px;
+            height: 250px;
         }
         .floating-bg-img:nth-child(2) {
-            bottom: 15%;
-            right: 8%;
-            width: 450px;
-            height: 350px;
-            animation-delay: -10s;
-            animation-direction: reverse;
+            bottom: 10%;
+            right: 5%;
+            width: 400px;
+            height: 300px;
+            animation-delay: -12s;
         }
         @keyframes floatBgImage {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(30px, -20px) rotate(2deg);
-            }
-            50% {
-                transform: translate(-20px, 15px) rotate(-1deg);
-            }
-            75% {
-                transform: translate(15px, 25px) rotate(1deg);
-            }
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            33% { transform: translate(20px, -15px) rotate(1deg) scale(1.05); }
+            66% { transform: translate(-15px, 10px) rotate(-0.5deg) scale(0.95); }
         }
 
-        /* ===== FONDO CON RAYOS DE LUZ TECNOLÓGICOS ===== */
+        /* ===== RAYOS DE LUZ ===== */
         .tech-rays-bg {
             position: fixed;
             top: 0;
@@ -86,42 +146,19 @@
         .tech-ray {
             position: absolute;
             width: 2px;
-            height: 100%;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                rgba(0, 255, 180, 0.15) 20%, 
-                rgba(0, 180, 255, 0.25) 50%, 
-                rgba(0, 255, 180, 0.15) 80%, 
-                transparent 100%);
-            animation: moveRay 8s infinite linear;
-            filter: blur(2px);
-        }
-        .tech-ray:nth-child(odd) {
-            width: 1px;
-            animation-duration: 10s;
-            animation-delay: -2s;
-        }
-        .tech-ray:nth-child(3n) {
-            width: 3px;
-            animation-duration: 6s;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                rgba(0, 255, 200, 0.2) 30%, 
-                rgba(100, 200, 255, 0.3) 60%, 
-                rgba(0, 255, 200, 0.2) 90%, 
-                transparent 100%);
+            height: 120%;
+            background: linear-gradient(to bottom, transparent, rgba(0,255,136,0.15) 30%, rgba(0,200,255,0.25) 60%, transparent);
+            animation: moveRay linear infinite;
+            filter: blur(1px);
+            will-change: transform;
         }
         @keyframes moveRay {
-            0% {
-                transform: translateX(-100vw);
-            }
-            100% {
-                transform: translateX(100vw);
-            }
+            0% { transform: translateX(-100vw); }
+            100% { transform: translateX(110vw); }
         }
 
-        /* ===== PARTÍCULAS TECNOLÓGICAS ===== */
-        .animated-bg {
+        /* ===== PARTÍCULAS ===== */
+        .particles-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -131,337 +168,908 @@
             pointer-events: none;
             overflow: hidden;
         }
-        .floating-leaf {
+        .particle {
             position: absolute;
-            background: rgba(0, 200, 180, 0.2);
-            border-radius: 80% 0 70% 30% / 60% 50% 40% 50%;
-            filter: blur(2px);
-            animation: floatLeaf linear infinite;
-        }
-        @keyframes floatLeaf {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0.6);
-                opacity: 0;
-            }
-            30% { opacity: 0.5; }
-            100% {
-                transform: translateY(-20vh) rotate(340deg) scale(1.3);
-                opacity: 0;
-            }
-        }
-        .soft-particle {
-            position: absolute;
-            background: rgba(0, 180, 255, 0.2);
+            background: var(--verde-brillante);
             border-radius: 50%;
-            animation: driftParticle 14s infinite alternate ease-in-out;
-            box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+            animation: particleFloat linear infinite;
+            box-shadow: 0 0 6px rgba(0,255,136,0.5);
+            will-change: transform, opacity;
         }
-        @keyframes driftParticle {
-            0% { transform: translateY(0) scale(0.8); opacity: 0; }
-            50% { opacity: 0.5; transform: translateY(-35vh) scale(1.1); }
-            100% { transform: translateY(-70vh) scale(1.4); opacity: 0; }
-        }
-        .light-trail {
-            position: absolute;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ffb3, #0088ff, transparent);
-            border-radius: 50%;
-            animation: trailMove 8s infinite linear;
-        }
-        @keyframes trailMove {
-            0% { transform: translateX(-20vw) rotate(15deg); opacity: 0; }
-            50% { opacity: 0.4; }
-            100% { transform: translateX(120vw) rotate(15deg); opacity: 0; }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* Contenedor principal */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 6rem 1.5rem 3rem;
-            position: relative;
-            z-index: 5;
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 20, 40, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--verde-brillante);
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
-
-        /* Hero: título con estilo tecnológico */
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 0.9s ease-out;
+        .navbar-logos {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .navbar-logos img {
+            height: 40px;
+            width: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 3px;
         }
-        .hero h1 {
+        .navbar-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            background: linear-gradient(135deg, #00ff88, #00ccff, #00ff88);
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 700;
-            letter-spacing: 1px;
-            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-            margin-bottom: 0.5rem;
         }
-        .hero p {
-            background: rgba(0, 40, 60, 0.6);
-            backdrop-filter: blur(10px);
-            display: inline-block;
-            padding: 0.5rem 1.6rem;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 400;
-            border: 1px solid #00ccff;
-            margin-top: 10px;
-            color: #b8e6ff;
+        .nav-links {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
         }
-
-        @media (max-width: 640px) {
-            .container {
-                padding-top: 4.5rem;
-            }
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* ===== TARJETAS CON DISEÑO TECNOLÓGICO ===== */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0 2rem;
-        }
-        .info-card {
-            background: linear-gradient(135deg, rgba(0, 40, 70, 0.8), rgba(0, 60, 50, 0.7));
-            backdrop-filter: blur(15px);
-            border-radius: 2rem;
-            padding: 1.5rem;
-            border: 1px solid #00ccff;
+        .nav-btn {
+            background: var(--glass-light);
+            border: 1px solid var(--cyan);
+            color: #e0f0ff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            opacity: 0;
-            transform: translateY(30px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 200, 255, 0.1);
+            transition: var(--transition);
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--verde-bandera);
+            border-color: var(--verde-brillante);
+            box-shadow: var(--neon-shadow);
+            transform: translateY(-2px);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 7rem 1.5rem 3rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
             text-align: center;
-            animation: cardPulse 4s infinite alternate;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan), var(--verde-brillante));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 40px rgba(0,255,136,0.3);
+            margin-bottom: 1rem;
+        }
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            color: var(--cyan);
+            letter-spacing: 3px;
+            background: rgba(0,30,60,0.6);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 0.6rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--cyan);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== BOTONES DE NAVEGACIÓN PRINCIPAL ===== */
+        .main-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .main-nav-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 2px solid var(--cyan);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            color: #e0f0ff;
             position: relative;
             overflow: hidden;
         }
-        .info-card::before {
+        .main-nav-card::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 200, 0.05), transparent);
-            transform: rotate(45deg);
-            animation: cardShine 3s infinite;
+            background: radial-gradient(circle, rgba(0,255,136,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        @keyframes cardShine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        .main-nav-card:hover::before { opacity: 1; }
+        .main-nav-card:hover {
+            border-color: var(--verde-brillante);
+            box-shadow: var(--neon-shadow);
+            transform: translateY(-5px);
         }
-        @keyframes cardPulse {
-            0% { box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 200, 255, 0.1); border-color: #00ccff; }
-            100% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 255, 136, 0.2); border-color: #00ff88; }
-        }
-        .info-card.reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .info-card:hover {
-            transform: translateY(-8px);
-            border-color: #00ff88;
-            background: linear-gradient(135deg, rgba(0, 60, 80, 0.9), rgba(0, 80, 60, 0.8));
-            animation-play-state: paused;
-        }
-        .card-icon {
+        .main-nav-card i {
             font-size: 2.5rem;
-            margin-bottom: 0.7rem;
-            background: linear-gradient(135deg, #00ff88, #00ccff);
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            transition: transform 0.3s;
+            margin-bottom: 0.8rem;
             position: relative;
             z-index: 1;
         }
-        .info-card:hover .card-icon {
-            transform: scale(1.2) rotate(5deg);
+        .main-nav-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: var(--cyan);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SECCIONES ===== */
+        .section {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--cyan);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        .section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .section h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--verde-brillante);
+            margin: 1.2rem 0 0.8rem;
+        }
+        .section p, .section li {
+            line-height: 1.8;
+            color: #c0d8f0;
+            margin-bottom: 0.8rem;
+        }
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .section ul li::before {
+            content: '▸ ';
+            color: var(--verde-brillante);
+            font-weight: bold;
+        }
+
+        /* ===== CAROUSEL ===== */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px solid var(--cyan);
+            box-shadow: var(--neon-shadow);
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            padding: 2rem;
+            text-align: center;
+            background: var(--glass);
+        }
+        .carousel-slide img {
+            max-width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--verde-bandera);
+            border: 2px solid var(--verde-brillante);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: var(--transition);
+        }
+        .carousel-btn:hover {
+            background: var(--azul-tech);
+            box-shadow: var(--neon-shadow);
+        }
+        .carousel-btn.prev { left: 15px; }
+        .carousel-btn.next { right: 15px; }
+
+        /* ===== GRID DE TARJETAS ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .info-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid var(--cyan);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card:hover {
+            border-color: var(--verde-brillante);
+            box-shadow: var(--neon-shadow);
+            transform: translateY(-4px);
+        }
+        .info-card i {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
         }
         .info-card h3 {
-            font-size: 1.5rem;
             font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--cyan);
             margin-bottom: 0.5rem;
-            color: #00ffcc;
-            position: relative;
-            z-index: 1;
         }
-        .card-preview {
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-bottom: 0.7rem;
-            color: #b8e6ff;
-            position: relative;
-            z-index: 1;
-        }
-        /* Contenido expandible */
         .expandable-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1);
-            background: rgba(0, 30, 50, 0.9);
+            transition: max-height 0.5s ease;
+            background: rgba(0,20,40,0.8);
             border-radius: 1rem;
             margin-top: 0;
-            padding: 0 0.8rem;
+            padding: 0 1rem;
             text-align: left;
-            font-size: 0.85rem;
-            line-height: 1.45;
-            border-left: 3px solid #00ff88;
-            position: relative;
-            z-index: 1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border-left: 3px solid var(--verde-brillante);
         }
         .expandable-content.show {
-            max-height: 400px;
+            max-height: 500px;
             margin-top: 1rem;
-            padding: 0.8rem;
+            padding: 1rem;
             overflow-y: auto;
         }
-        .expandable-content i {
-            margin-right: 6px;
-            color: #00ffcc;
+
+        /* ===== FORMULARIO ===== */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            color: var(--cyan);
+            margin-bottom: 0.4rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--cyan);
+            background: rgba(0,20,40,0.6);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--verde-brillante);
+            box-shadow: var(--neon-shadow);
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, var(--verde-bandera), var(--azul-tech));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid var(--verde-brillante);
+        }
+        .submit-btn:hover {
+            box-shadow: var(--neon-shadow);
+            transform: scale(1.03);
         }
 
-        /* Créditos con estilo tecnológico */
+        /* ===== MAPA ===== */
+        .map-container {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 2px solid var(--cyan);
+            height: 350px;
+            margin: 1.5rem 0;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== CRÉDITOS ===== */
         .credits-section {
-            margin: 2rem 0 1.5rem;
             text-align: center;
-            animation: fadeInUp 0.9s ease-out;
-            background: rgba(0, 30, 50, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 2rem;
             padding: 2rem;
-            border: 1px solid #00ccff;
+            background: var(--glass);
+            border-radius: 2rem;
+            border: 2px solid var(--cyan);
+            animation: fadeInUp 0.8s ease-out;
         }
         .credit-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            background: linear-gradient(135deg, #00ff88, #00ccff);
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 0.5rem 0;
+            margin: 0.4rem 0;
             letter-spacing: 1px;
         }
         .school-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #00ff88, #00ccff, #00ff88);
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--dorado), var(--verde-brillante));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 700;
-            margin-top: 1.5rem;
+            font-weight: 900;
+            margin-top: 1rem;
             animation: schoolGlow 2s infinite alternate;
-            letter-spacing: 2px;
         }
         @keyframes schoolGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5)); }
-            100% { filter: drop-shadow(0 0 25px rgba(0, 200, 255, 0.8)); }
+            from { filter: drop-shadow(0 0 8px rgba(0,255,136,0.4)); }
+            to { filter: drop-shadow(0 0 20px rgba(0,200,255,0.8)); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar { padding: 0.5rem; }
+            .navbar-logos img { height: 30px; }
+            .navbar-title { font-size: 1rem; }
+            .nav-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+            .container { padding: 6rem 0.8rem 2rem; }
+            .section { padding: 1.2rem; }
+            .carousel-slide img { height: 200px; }
         }
     </style>
 </head>
 <body>
 
-<!-- IMÁGENES DE FONDO FLOTANTES -->
+<!-- INTRO ANIMATION -->
+<div class="intro-overlay">
+    <div class="intro-content">
+        <div class="intro-logo">☁️</div>
+        <div class="intro-text">CLOUD COMPUTING</div>
+    </div>
+</div>
+
+<!-- IMÁGENES DE FONDO -->
 <div class="floating-bg-images">
-    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tecnología Cloud" class="floating-bg-img">
-    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Servidores Cloud" class="floating-bg-img">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Cloud Tech" class="floating-bg-img" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600" alt="Data Center" class="floating-bg-img" loading="lazy">
 </div>
 
-<!-- RAYOS DE LUZ TECNOLÓGICOS -->
-<div class="tech-rays-bg">
-    <div class="tech-ray" style="left: 10%;"></div>
-    <div class="tech-ray" style="left: 25%;"></div>
-    <div class="tech-ray" style="left: 40%;"></div>
-    <div class="tech-ray" style="left: 55%;"></div>
-    <div class="tech-ray" style="left: 70%;"></div>
-    <div class="tech-ray" style="left: 85%;"></div>
-    <div class="tech-ray" style="left: 15%; animation-duration: 12s;"></div>
-    <div class="tech-ray" style="left: 35%; animation-duration: 7s;"></div>
-    <div class="tech-ray" style="left: 50%; animation-duration: 9s;"></div>
-    <div class="tech-ray" style="left: 65%; animation-duration: 11s;"></div>
-    <div class="tech-ray" style="left: 80%; animation-duration: 8s;"></div>
-    <div class="tech-ray" style="left: 95%; animation-duration: 13s;"></div>
-</div>
+<!-- RAYOS DE LUZ -->
+<div class="tech-rays-bg" id="techRays"></div>
 
-<div class="animated-bg" id="leafBg"></div>
+<!-- PARTÍCULAS -->
+<div class="particles-bg" id="particlesBg"></div>
 
-<div class="container">
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-logos">
+        <img src="https://www.gob.mx/cms/uploads/image/file/447990/SEP_logo_2019.png" alt="SEP" loading="lazy" onerror="this.style.display='none'">
+        <span class="navbar-title">CBTa 181</span>
+    </div>
+    <div class="nav-links">
+        <a href="#inicio" class="nav-btn active">Inicio</a>
+        <a href="#hibrida" class="nav-btn">Híbrida</a>
+        <a href="#publica" class="nav-btn">Pública</a>
+        <a href="#privada" class="nav-btn">Privada</a>
+        <a href="#comunitaria" class="nav-btn">Comunitaria</a>
+        <a href="#usos" class="nav-btn">Usos</a>
+        <a href="#ventajas" class="nav-btn">Ventajas</a>
+        <a href="#proveedor" class="nav-btn">Proveedores</a>
+        <a href="#terminos" class="nav-btn">Términos</a>
+        <a href="#referencias" class="nav-btn">Referencias</a>
+    </div>
+</nav>
+
+<div class="container" id="inicio">
+    <!-- HERO -->
     <div class="hero">
         <h1>☁️ CLOUD COMPUTING ☁️</h1>
-        <p><i class="fas fa-hand-pointer"></i> Haz clic en cada recuadro → se despliega información</p>
+        <p class="hero-subtitle">INFORMÁTICA EN LA NUBE · VERDE BANDERA & AZUL TECNOLOGÍA</p>
     </div>
 
-    <!-- 6 RECUADROS DE CLOUD COMPUTING -->
-    <div class="cards-grid">
-        <div class="info-card" data-card="1">
-            <div class="card-icon"><i class="fas fa-cloud"></i></div>
-            <h3>IaaS</h3>
-            <div class="card-preview">Infraestructura como Servicio · Haz clic</div>
-            <div class="expandable-content" id="expand1">
-                <p><i class="fas fa-server"></i> <strong>Infraestructura como Servicio:</strong> Proporciona recursos de computación virtualizados a través de internet. AWS EC2, Azure VMs y Google Compute Engine permiten escalar infraestructura bajo demanda. Ideal para migración de servidores físicos a la nube.</p>
+    <!-- BOTONES PRINCIPALES -->
+    <div class="main-nav-grid">
+        <a href="#hibrida" class="main-nav-card">
+            <i class="fas fa-cloud-sun"></i>
+            <h3>Nube Híbrida</h3>
+        </a>
+        <a href="#publica" class="main-nav-card">
+            <i class="fas fa-globe-americas"></i>
+            <h3>Nube Pública</h3>
+        </a>
+        <a href="#privada" class="main-nav-card">
+            <i class="fas fa-lock"></i>
+            <h3>Nube Privada</h3>
+        </a>
+        <a href="#comunitaria" class="main-nav-card">
+            <i class="fas fa-users"></i>
+            <h3>Nube Comunitaria</h3>
+        </a>
+        <a href="#referencias" class="main-nav-card">
+            <i class="fas fa-book"></i>
+            <h3>Fuentes de Información</h3>
+        </a>
+        <a href="#formulario" class="main-nav-card">
+            <i class="fas fa-clipboard-check"></i>
+            <h3>Formulario de Experiencia</h3>
+        </a>
+    </div>
+
+    <!-- CARRUSEL DE IMÁGENES -->
+    <div class="section">
+        <h2>📸 GALERÍA CLOUD COMPUTING</h2>
+        <div class="carousel-container" id="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800" alt="Cloud Servers" loading="lazy">
+                    <h3>Infraestructura Cloud Global</h3>
+                    <p>Centros de datos interconectados alrededor del mundo</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800" alt="Data Analysis" loading="lazy">
+                    <h3>Big Data & Analytics</h3>
+                    <p>Procesamiento masivo de datos en tiempo real</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800" alt="Network" loading="lazy">
+                    <h3>Conectividad Global</h3>
+                    <p>Redes de alta velocidad para aplicaciones cloud</p>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800" alt="AI Cloud" loading="lazy">
+                    <h3>Inteligencia Artificial en la Nube</h3>
+                    <p>Modelos de ML y Deep Learning escalables</p>
+                </div>
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel(-1)">◀</button>
+            <button class="carousel-btn next" onclick="moveCarousel(1)">▶</button>
+        </div>
+    </div>
+
+    <!-- NUBE HÍBRIDA -->
+    <div class="section" id="hibrida">
+        <h2>🔗 NUBE HÍBRIDA</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-arrows-alt-h"></i>
+                <h3>Definición</h3>
+                <div class="expandable-content">
+                    <p>La nube híbrida combina infraestructura de nube pública y privada, permitiendo que datos y aplicaciones se compartan entre ellas. Ofrece lo mejor de ambos mundos: la seguridad del entorno privado y la escalabilidad del público.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Características</h3>
+                <div class="expandable-content">
+                    <ul>
+                        <li>Orquestación entre plataformas</li>
+                        <li>Portabilidad de cargas de trabajo</li>
+                        <li>Gestión unificada</li>
+                        <li>Bursting a nube pública</li>
+                        <li>Cumplimiento normativo flexible</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-building"></i>
+                <h3>Empresas que la usan</h3>
+                <div class="expandable-content">
+                    <p><strong>Netflix:</strong> Usa AWS para streaming y centros propios para contenido crítico.</p>
+                    <p><strong>Airbnb:</strong> Combina AWS con infraestructura privada para datos de usuarios.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-video"></i>
+                <h3>Video Explicativo</h3>
+                <div class="expandable-content">
+                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/3kGFBBy3Lyg" frameborder="0" allowfullscreen loading="lazy"></iframe>
+                </div>
             </div>
         </div>
-        <div class="info-card" data-card="2">
-            <div class="card-icon"><i class="fas fa-cubes"></i></div>
-            <h3>PaaS</h3>
-            <div class="card-preview">Plataforma como Servicio · Pulsa</div>
-            <div class="expandable-content" id="expand2">
-                <p><i class="fas fa-code"></i> <strong>Plataforma como Servicio:</strong> Entorno completo para desarrollo y despliegue de aplicaciones sin gestionar infraestructura. Google App Engine, Heroku y Azure App Service facilitan CI/CD. Soporta múltiples lenguajes: Python, Node.js, Java, Go.</p>
+    </div>
+
+    <!-- NUBE PÚBLICA -->
+    <div class="section" id="publica">
+        <h2>🌐 NUBE PÚBLICA</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Definición</h3>
+                <div class="expandable-content">
+                    <p>Servicios de computación ofrecidos por proveedores externos a través de internet público. Los recursos (servidores, almacenamiento) son propiedad del proveedor y se comparten entre múltiples clientes (multi-tenant).</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Modelo de Pago</h3>
+                <div class="expandable-content">
+                    <p>Pay-as-you-go: Solo pagas por los recursos que consumes. Sin inversión inicial en hardware. Escalabilidad instantánea según demanda.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Estadísticas</h3>
+                <div class="expandable-content">
+                    <p>AWS posee el 32% del mercado. Azure el 23%. Google Cloud el 11%. El mercado de nube pública crece un 20% anual y alcanzará $800 mil millones en 2028.</p>
+                </div>
             </div>
         </div>
-        <div class="info-card" data-card="3">
-            <div class="card-icon"><i class="fas fa-desktop"></i></div>
-            <h3>SaaS</h3>
-            <div class="card-preview">Software como Servicio · Click</div>
-            <div class="expandable-content" id="expand3">
-                <p><i class="fas fa-globe"></i> <strong>Software como Servicio:</strong> Aplicaciones listas para usar accesibles vía web. Microsoft 365, Salesforce, Google Workspace. Actualizaciones automáticas, pago por suscripción, accesible desde cualquier dispositivo con internet.</p>
+    </div>
+
+    <!-- NUBE PRIVADA -->
+    <div class="section" id="privada">
+        <h2>🔒 NUBE PRIVADA</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-shield-haltered"></i>
+                <h3>Definición</h3>
+                <div class="expandable-content">
+                    <p>Infraestructura cloud dedicada exclusivamente a una organización. Puede estar on-premise o alojada por un tercero. Ofrece máximo control, seguridad y personalización.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-check-circle"></i>
+                <h3>Ventajas</h3>
+                <div class="expandable-content">
+                    <ul>
+                        <li>Control total sobre datos y seguridad</li>
+                        <li>Cumplimiento regulatorio estricto</li>
+                        <li>Rendimiento predecible</li>
+                        <li>Personalización completa</li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="info-card" data-card="4">
-            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
-            <h3>Seguridad Cloud</h3>
-            <div class="card-preview">Protección de datos · Expande</div>
-            <div class="expandable-content" id="expand4">
-                <p><i class="fas fa-lock"></i> <strong>Cloud Security:</strong> Encriptación AES-256, autenticación multifactor, firewalls de próxima generación. Modelo de responsabilidad compartida. Cumplimiento GDPR, HIPAA, ISO 27001. Zero Trust Architecture para protección avanzada.</p>
+    </div>
+
+    <!-- NUBE COMUNITARIA -->
+    <div class="section" id="comunitaria">
+        <h2>👥 NUBE COMUNITARIA</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-handshake"></i>
+                <h3>Definición</h3>
+                <div class="expandable-content">
+                    <p>Infraestructura compartida por varias organizaciones con intereses comunes (misión, seguridad, cumplimiento). Puede ser gestionada internamente o por un tercero.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-hospital"></i>
+                <h3>Ejemplos</h3>
+                <div class="expandable-content">
+                    <p><strong>Healthcare Cloud:</strong> Hospitales comparten infraestructura cumpliendo HIPAA.</p>
+                    <p><strong>GovCloud:</strong> Agencias gubernamentales comparten nube segura.</p>
+                </div>
             </div>
         </div>
-        <div class="info-card" data-card="5">
-            <div class="card-icon"><i class="fas fa-brain"></i></div>
-            <h3>AI & Machine Learning</h3>
-            <div class="card-preview">Inteligencia Artificial Cloud · Más</div>
-            <div class="expandable-content" id="expand5">
-                <p><i class="fas fa-robot"></i> <strong>AI/ML en la Nube:</strong> AWS SageMaker, Google AI Platform, Azure ML. Entrenamiento de modelos con GPU/TPU. APIs pre-entrenadas para visión, lenguaje natural, predicciones. Escalabilidad para big data y deep learning.</p>
+    </div>
+
+    <!-- USOS DE LA INFORMÁTICA EN LA NUBE -->
+    <div class="section" id="usos">
+        <h2>💡 USOS DE LA INFORMÁTICA EN LA NUBE</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-database"></i>
+                <h3>Almacenamiento</h3>
+                <div class="expandable-content">
+                    <p>Google Drive, Dropbox, OneDrive. Backup automático, sincronización multi-dispositivo, versionado de archivos. Escalabilidad ilimitada.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-code"></i>
+                <h3>Desarrollo</h3>
+                <div class="expandable-content">
+                    <p>GitHub Codespaces, AWS Cloud9. Entornos de desarrollo completos en el navegador. CI/CD con GitHub Actions, Jenkins.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-brain"></i>
+                <h3>IA & Machine Learning</h3>
+                <div class="expandable-content">
+                    <p>Entrenamiento de modelos con GPU/TPU. APIs de visión, lenguaje, predicción. AWS SageMaker, Google Vertex AI.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Gaming</h3>
+                <div class="expandable-content">
+                    <p>Xbox Cloud Gaming, NVIDIA GeForce Now, PlayStation Now. Juegos AAA en cualquier dispositivo sin hardware potente.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-video"></i>
+                <h3>Streaming</h3>
+                <div class="expandable-content">
+                    <p>Netflix usa AWS para transcodificar y entregar contenido a 230M+ suscriptores. YouTube procesa 500 horas de video por minuto.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-robot"></i>
+                <h3>IoT</h3>
+                <div class="expandable-content">
+                    <p>AWS IoT Core, Azure IoT Hub. Conexión de millones de dispositivos, procesamiento de telemetría en tiempo real.</p>
+                </div>
             </div>
         </div>
-        <div class="info-card" data-card="6">
-            <div class="card-icon"><i class="fas fa-server"></i></div>
-            <h3>Edge Computing</h3>
-            <div class="card-preview">Procesamiento descentralizado · Haz clic</div>
-            <div class="expandable-content" id="expand6">
-                <p><i class="fas fa-microchip"></i> <strong>Edge Computing:</strong> Procesamiento de datos cerca de la fuente. AWS Wavelength, Azure Edge Zones. Reducción de latencia para IoT, vehículos autónomos, smart cities. Complementa el cloud centralizado con nodos distribuidos.</p>
+    </div>
+
+    <!-- VENTAJAS -->
+    <div class="section" id="ventajas">
+        <h2>⭐ PRINCIPALES VENTAJAS</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-coins"></i>
+                <h3>Reducción de Costos</h3>
+                <div class="expandable-content">
+                    <p>Elimina inversión en hardware. Pago por uso. Sin costos de mantenimiento de infraestructura física. Ahorro estimado del 30-50%.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-expand-arrows-alt"></i>
+                <h3>Escalabilidad</h3>
+                <div class="expandable-content">
+                    <p>Escala recursos en minutos. Auto-scaling según demanda. Soporta picos de tráfico sin degradación del servicio.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-globe"></i>
+                <h3>Accesibilidad Global</h3>
+                <div class="expandable-content">
+                    <p>Acceso desde cualquier lugar con internet. Colaboración en tiempo real. CDN para entrega rápida de contenido mundial.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-sync-alt"></i>
+                <h3>Recuperación de Desastres</h3>
+                <div class="expandable-content">
+                    <p>Backup automático multi-región. RTO y RPO mínimos. Replicación en tiempo real. Continuidad de negocio garantizada.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ¿CÓMO ELEGIR PROVEEDOR? -->
+    <div class="section" id="proveedor">
+        <h2>🏢 ¿CÓMO ELEGIR UN PROVEEDOR DE SERVICIOS EN LA NUBE?</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Certificaciones</h3>
+                <div class="expandable-content">
+                    <p>Verificar cumplimiento: ISO 27001, SOC 2, HIPAA, GDPR, PCI-DSS. Los proveedores líderes mantienen múltiples certificaciones.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-clock"></i>
+                <h3>SLA y Uptime</h3>
+                <div class="expandable-content">
+                    <p>AWS: 99.99% SLA. Azure: 99.95%. Google Cloud: 99.99%. Revisar compensaciones por tiempo de inactividad.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Regiones Disponibles</h3>
+                <div class="expandable-content">
+                    <p>AWS: 32 regiones. Azure: 60+ regiones. Google Cloud: 40 regiones. Elegir cercanía a usuarios para baja latencia.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Modelo de Precios</h3>
+                <div class="expandable-content">
+                    <p>Comparar costos: Compute, Storage, Networking, Data Transfer. Usar calculadoras: AWS Pricing Calculator, Azure Pricing Calculator.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-headset"></i>
+                <h3>Soporte Técnico</h3>
+                <div class="expandable-content">
+                    <p>Planes de soporte: Basic, Developer, Business, Enterprise. Tiempos de respuesta garantizados. Soporte en español disponible.</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-plug"></i>
+                <h3>Ecosistema</h3>
+                <div class="expandable-content">
+                    <p>Integraciones nativas, marketplace de servicios, comunidad de desarrolladores, documentación extensa, SDKs disponibles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10 TÉRMINOS -->
+    <div class="section" id="terminos">
+        <h2>📚 10 TÉRMINOS DE INFORMÁTICA EN LA NUBE</h2>
+        <div class="cards-grid">
+            <div class="info-card"><i class="fas fa-server"></i><h3>1. IaaS</h3><div class="expandable-content"><p>Infraestructura como Servicio. Recursos de computación virtualizados (servidores, almacenamiento, redes). Ej: AWS EC2.</p></div></div>
+            <div class="info-card"><i class="fas fa-layer-group"></i><h3>2. PaaS</h3><div class="expandable-content"><p>Plataforma como Servicio. Entorno para desarrollar y desplegar apps sin gestionar infraestructura. Ej: Heroku.</p></div></div>
+            <div class="info-card"><i class="fas fa-window-maximize"></i><h3>3. SaaS</h3><div class="expandable-content"><p>Software como Servicio. Apps listas para usar vía web. Ej: Google Workspace, Microsoft 365.</p></div></div>
+            <div class="info-card"><i class="fas fa-dharmachakra"></i><h3>4. Kubernetes</h3><div class="expandable-content"><p>Orquestador de contenedores open-source. Automatiza despliegue, escalado y gestión de aplicaciones containerizadas.</p></div></div>
+            <div class="info-card"><i class="fas fa-box"></i><h3>5. Docker</h3><div class="expandable-content"><p>Plataforma para crear y ejecutar aplicaciones en contenedores. Aísla apps del sistema operativo. Portabilidad total.</p></div></div>
+            <div class="info-card"><i class="fas fa-exchange-alt"></i><h3>6. API Gateway</h3><div class="expandable-content"><p>Punto de entrada único para APIs. Maneja autenticación, rate limiting, versionado. Ej: AWS API Gateway.</p></div></div>
+            <div class="info-card"><i class="fas fa-balance-scale"></i><h3>7. Load Balancer</h3><div class="expandable-content"><p>Distribuye tráfico entre múltiples servidores. Mejora disponibilidad y rendimiento. Soporta SSL termination.</p></div></div>
+            <div class="info-card"><i class="fas fa-network-wired"></i><h3>8. CDN</h3><div class="expandable-content"><p>Content Delivery Network. Red de servidores que entregan contenido desde ubicación más cercana al usuario. Ej: CloudFront.</p></div></div>
+            <div class="info-card"><i class="fas fa-infinity"></i><h3>9. Serverless</h3><div class="expandable-content"><p>Ejecuta código sin aprovisionar servidores. Escalado automático. Pago por ejecución. Ej: AWS Lambda.</p></div></div>
+            <div class="info-card"><i class="fas fa-project-diagram"></i><h3>10. Microservicios</h3><div class="expandable-content"><p>Arquitectura donde apps se componen de servicios pequeños e independientes. Comunicación vía APIs. Escalado granular.</p></div></div>
+        </div>
+    </div>
+
+    <!-- MAPA -->
+    <div class="section" id="mapa">
+        <h2>🗺️ REGIONES DE CLOUD MUNDIALES</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28349574.613515444!2d-99.5!3d35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDAwJzAwLjAiTiA5OcKwMzAnMDAuMCJX!5e0!3m2!1ses!2smx!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p style="text-align:center; color:var(--cyan); margin-top:1rem;">Principales regiones: AWS (N. Virginia, Ohio, Oregon, Frankfurt, Tokyo) | Azure (East US, West Europe, Southeast Asia) | Google Cloud (us-central1, europe-west1, asia-east1)</p>
+    </div>
+
+    <!-- FORMULARIO DE EXPERIENCIA -->
+    <div class="section" id="formulario">
+        <h2>📋 FORMULARIO DE EXPERIENCIA EN NAVEGACIÓN</h2>
+        <form id="experienceForm" onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" placeholder="Escribe tu nombre" required>
+            </div>
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>¿Qué tipo de nube te resultó más interesante?</label>
+                <select required>
+                    <option value="">Selecciona una opción</option>
+                    <option>Nube Híbrida</option>
+                    <option>Nube Pública</option>
+                    <option>Nube Privada</option>
+                    <option>Nube Comunitaria</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Califica la experiencia de navegación (1-5)</label>
+                <input type="range" min="1" max="5" value="5" style="width:100%; accent-color: var(--verde-brillante);">
+                <div style="display:flex; justify-content:space-between; color:var(--cyan);">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Comentarios o sugerencias</label>
+                <textarea rows="4" placeholder="Tu opinión es importante..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">🚀 Enviar Experiencia</button>
+        </form>
+        <div id="formMessage" style="margin-top:1rem; text-align:center; display:none;"></div>
+    </div>
+
+    <!-- REFERENCIAS BIBLIOGRÁFICAS -->
+    <div class="section" id="referencias">
+        <h2>📖 REFERENCIAS BIBLIOGRÁFICAS</h2>
+        <div class="cards-grid">
+            <div class="info-card">
+                <i class="fas fa-book"></i>
+                <h3>Libros</h3>
+                <div class="expandable-content">
+                    <ul>
+                        <li>Mell, P., & Grance, T. (2011). <em>The NIST Definition of Cloud Computing</em>. NIST Special Publication 800-145.</li>
+                        <li>Erl, T., Puttini, R., & Mahmood, Z. (2013). <em>Cloud Computing: Concepts, Technology & Architecture</em>. Prentice Hall.</li>
+                        <li>Buyya, R., Vecchiola, C., & Selvi, S.T. (2013). <em>Mastering Cloud Computing</em>. Morgan Kaufmann.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-globe"></i>
+                <h3>Sitios Web Oficiales</h3>
+                <div class="expandable-content">
+                    <ul>
+                        <li><a href="https://aws.amazon.com/es/what-is-cloud-computing/" target="_blank" style="color:var(--cyan);">AWS - ¿Qué es Cloud Computing?</a></li>
+                        <li><a href="https://azure.microsoft.com/es-es/resources/cloud-computing-dictionary/what-is-cloud-computing" target="_blank" style="color:var(--cyan);">Microsoft Azure - Cloud Computing</a></li>
+                        <li><a href="https://cloud.google.com/learn/what-is-cloud-computing?hl=es" target="_blank" style="color:var(--cyan);">Google Cloud - ¿Qué es Cloud Computing?</a></li>
+                        <li><a href="https://www.ibm.com/mx-es/cloud/learn/cloud-computing" target="_blank" style="color:var(--cyan);">IBM Cloud - Cloud Computing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-newspaper"></i>
+                <h3>Artículos Académicos</h3>
+                <div class="expandable-content">
+                    <ul>
+                        <li>Armbrust, M. et al. (2010). "A View of Cloud Computing". <em>Communications of the ACM</em>.</li>
+                        <li>Zhang, Q., Cheng, L., & Boutaba, R. (2010). "Cloud computing: state-of-the-art and research challenges". <em>Journal of Internet Services and Applications</em>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-chart-pie"></i>
+                <h3>Reportes de Mercado</h3>
+                <div class="expandable-content">
+                    <ul>
+                        <li>Gartner. (2024). <em>Magic Quadrant for Cloud Infrastructure and Platform Services</em>.</li>
+                        <li>IDC. (2024). <em>Worldwide Quarterly Cloud Services Tracker</em>.</li>
+                        <li>Flexera. (2024). <em>State of the Cloud Report</em>.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -471,112 +1079,95 @@
         <div class="credit-name">Erick Esquivel Mendoza</div>
         <div class="credit-name">Melissa Bermúdez Ramírez</div>
         <div class="school-name">CBTa 181</div>
+        <p style="color:var(--cyan); margin-top:1rem; font-family:'Rajdhani',sans-serif;">🌿 Verde Bandera & Azul Tecnología 🌿</p>
     </div>
 </div>
 
 <script>
-    // ===== 1. EXPANSIÓN DE TARJETAS AL HACER CLIC (SOLO UNA A LA VEZ) =====
-    const cards = document.querySelectorAll('.info-card');
-    cards.forEach(card => {
-        const expandDiv = card.querySelector('.expandable-content');
-        if(expandDiv) expandDiv.classList.remove('show');
-
-        card.addEventListener('click', (e) => {
-            e.stopPropagation();
-            
-            // Cerrar todos los demás recuadros primero
-            cards.forEach(otherCard => {
-                const otherExpand = otherCard.querySelector('.expandable-content');
-                if(otherExpand && otherExpand !== expandDiv && otherExpand.classList.contains('show')) {
-                    otherExpand.classList.remove('show');
-                }
-            });
-            
-            // Alternar el recuadro actual
-            expandDiv.classList.toggle('show');
-            
-            // Retroalimentación visual mejorada
-            card.style.transform = 'scale(0.95)';
-            card.style.borderColor = '#00ff88';
-            card.style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.4)';
-            setTimeout(() => { 
-                card.style.transform = ''; 
-                card.style.borderColor = '';
-                card.style.boxShadow = '';
-            }, 200);
-        });
-    });
-
-    // ===== 2. REVELADO DE TARJETAS AL SCROLL =====
-    const revealCards = document.querySelectorAll('.info-card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('reveal');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
-    revealCards.forEach(card => observer.observe(card));
-
-    // ===== 3. FONDO CON ELEMENTOS TECNOLÓGICOS =====
-    function generateBackground() {
-        const container = document.getElementById('leafBg');
-        // Partículas tecnológicas flotantes
-        for(let i=0; i<60; i++) {
-            let leaf = document.createElement('div');
-            leaf.classList.add('floating-leaf');
-            let size = Math.random() * 45 + 15;
-            leaf.style.width = `${size}px`;
-            leaf.style.height = `${size}px`;
-            leaf.style.left = `${Math.random() * 100}%`;
-            leaf.style.animationDuration = `${Math.random() * 14 + 7}s`;
-            leaf.style.animationDelay = `${Math.random() * 12}s`;
-            leaf.style.opacity = Math.random() * 0.45 + 0.1;
-            container.appendChild(leaf);
-        }
-        // Nodos de red brillantes
-        for(let i=0; i<40; i++) {
-            let particle = document.createElement('div');
-            particle.classList.add('soft-particle');
-            particle.style.width = `${Math.random() * 8 + 2}px`;
-            particle.style.height = particle.style.width;
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.animationDuration = `${Math.random() * 16 + 6}s`;
-            particle.style.animationDelay = `${Math.random() * 10}s`;
-            container.appendChild(particle);
-        }
-        // Estelas de datos
-        for(let i=0; i<15; i++) {
-            let trail = document.createElement('div');
-            trail.classList.add('light-trail');
-            trail.style.top = `${Math.random() * 100}%`;
-            trail.style.animationDuration = `${Math.random() * 10 + 6}s`;
-            trail.style.animationDelay = `${Math.random() * 8}s`;
-            container.appendChild(trail);
+    // ===== GENERAR RAYOS DE LUZ =====
+    function generateRays() {
+        const container = document.getElementById('techRays');
+        for(let i = 0; i < 15; i++) {
+            const ray = document.createElement('div');
+            ray.className = 'tech-ray';
+            ray.style.left = (i * 7) + '%';
+            ray.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            ray.style.animationDelay = -(Math.random() * 5) + 's';
+            container.appendChild(ray);
         }
     }
-    generateBackground();
 
-    // Revelado anticipado
-    setTimeout(() => {
-        revealCards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if(rect.top < window.innerHeight - 80) card.classList.add('reveal');
-        });
-    }, 150);
+    // ===== GENERAR PARTÍCULAS =====
+    function generateParticles() {
+        const container = document.getElementById('particlesBg');
+        for(let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = (Math.random() * 4 + 2) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 12 + 8) + 's';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            container.appendChild(particle);
+        }
+    }
 
-    // ===== 4. EFECTO DE CLIC FUERA PARA CERRAR =====
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.info-card')) {
-            cards.forEach(card => {
-                const expandDiv = card.querySelector('.expandable-content');
-                if(expandDiv && expandDiv.classList.contains('show')) {
-                    expandDiv.classList.remove('show');
-                }
+    // ===== CARRUSEL =====
+    let currentSlide = 0;
+    const totalSlides = 4;
+    function moveCarousel(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    setInterval(() => moveCarousel(1), 5000);
+
+    // ===== EXPANSIÓN DE TARJETAS (SOLO UNA A LA VEZ) =====
+    document.querySelectorAll('.info-card').forEach(card => {
+        const expandDiv = card.querySelector('.expandable-content');
+        if(!expandDiv) return;
+        expandDiv.classList.remove('show');
+        
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelectorAll('.expandable-content.show').forEach(el => {
+                if(el !== expandDiv) el.classList.remove('show');
             });
+            expandDiv.classList.toggle('show');
+        });
+    });
+
+    // ===== CERRAR AL HACER CLIC FUERA =====
+    document.addEventListener('click', (e) => {
+        if(!e.target.closest('.info-card')) {
+            document.querySelectorAll('.expandable-content.show').forEach(el => el.classList.remove('show'));
         }
     });
+
+    // ===== FORMULARIO =====
+    function submitForm(e) {
+        e.preventDefault();
+        const msg = document.getElementById('formMessage');
+        msg.style.display = 'block';
+        msg.style.color = 'var(--verde-brillante)';
+        msg.innerHTML = '✅ ¡Gracias por tu experiencia! Tu opinión ha sido registrada exitosamente.';
+        e.target.reset();
+        setTimeout(() => { msg.style.display = 'none'; }, 4000);
+    }
+
+    // ===== NAVEGACIÓN SUAVE =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // ===== INICIALIZACIÓN =====
+    generateRays();
+    generateParticles();
 </script>
 </body>
 </html>
