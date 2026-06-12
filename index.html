@@ -2,482 +2,581 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo Sobre las Tortugas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>Cloud Computing | Verde Bandera & Azul Tecnología</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos Generales */
-        body {
-            font-family: 'Roboto', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
+            box-sizing: border-box;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+        body {
+            background: #0a1a2e;
+            background-image: radial-gradient(circle at 10% 20%, #0d2b4a, #061220);
+            font-family: 'Inter', sans-serif;
+            color: #e2f0e3;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ===== IMÁGENES DE FONDO FLOTANTES ===== */
+        .floating-bg-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -4;
+            pointer-events: none;
             overflow: hidden;
         }
-
-        header {
-            background-color: #2e8b57; /* Verde mar */
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+        .floating-bg-img {
+            position: absolute;
+            border-radius: 20px;
+            opacity: 0.12;
+            filter: brightness(0.9) saturate(1.3);
+            animation: floatBgImage 20s infinite ease-in-out;
+        }
+        .floating-bg-img:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            width: 400px;
+            height: 300px;
+            animation-delay: 0s;
+        }
+        .floating-bg-img:nth-child(2) {
+            bottom: 15%;
+            right: 8%;
+            width: 450px;
+            height: 350px;
+            animation-delay: -10s;
+            animation-direction: reverse;
+        }
+        @keyframes floatBgImage {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(30px, -20px) rotate(2deg);
+            }
+            50% {
+                transform: translate(-20px, 15px) rotate(-1deg);
+            }
+            75% {
+                transform: translate(15px, 25px) rotate(1deg);
+            }
         }
 
-        header h1 {
-            font-family: 'Lora', serif;
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        nav {
-            background-color: #4CAF50; /* Verde más claro */
-            padding: 10px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 15px;
-            transition: background-color 0.3s ease;
-            border-radius: 5px;
-        }
-
-        nav ul li a:hover, nav ul li a.active {
-            background-color: #388e3c; /* Verde más oscuro al pasar el ratón */
-            color: #e0ffe0;
-        }
-
-        .main-content {
-            padding: 30px;
-        }
-
-        section {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #fdfdfd;
-            border-left: 5px solid #2e8b57;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        section h2 {
-            font-family: 'Lora', serif;
-            color: #2e8b57;
-            font-size: 2.2em;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 10px;
-        }
-
-        section h3 {
-            font-family: 'Lora', serif;
-            color: #388e3c;
-            font-size: 1.6em;
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 1em;
-            font-size: 1.05em;
-        }
-
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            margin-bottom: 1em;
-        }
-
-        ol {
-            list-style-type: decimal;
-            margin-left: 20px;
-            margin-bottom: 1em;
-        }
-
-        li {
-            margin-bottom: 0.5em;
-        }
-
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .image-gallery img {
+        /* ===== FONDO CON RAYOS DE LUZ TECNOLÓGICOS ===== */
+        .tech-rays-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .tech-ray {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 255, 180, 0.15) 20%, 
+                rgba(0, 180, 255, 0.25) 50%, 
+                rgba(0, 255, 180, 0.15) 80%, 
+                transparent 100%);
+            animation: moveRay 8s infinite linear;
+            filter: blur(2px);
+        }
+        .tech-ray:nth-child(odd) {
+            width: 1px;
+            animation-duration: 10s;
+            animation-delay: -2s;
+        }
+        .tech-ray:nth-child(3n) {
+            width: 3px;
+            animation-duration: 6s;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 255, 200, 0.2) 30%, 
+                rgba(100, 200, 255, 0.3) 60%, 
+                rgba(0, 255, 200, 0.2) 90%, 
+                transparent 100%);
+        }
+        @keyframes moveRay {
+            0% {
+                transform: translateX(-100vw);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
         }
 
-        .image-gallery img:hover {
-            transform: scale(1.03);
-        }
-
-        table {
+        /* ===== PARTÍCULAS TECNOLÓGICAS ===== */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .floating-leaf {
+            position: absolute;
+            background: rgba(0, 200, 180, 0.2);
+            border-radius: 80% 0 70% 30% / 60% 50% 40% 50%;
+            filter: blur(2px);
+            animation: floatLeaf linear infinite;
+        }
+        @keyframes floatLeaf {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.6);
+                opacity: 0;
+            }
+            30% { opacity: 0.5; }
+            100% {
+                transform: translateY(-20vh) rotate(340deg) scale(1.3);
+                opacity: 0;
+            }
+        }
+        .soft-particle {
+            position: absolute;
+            background: rgba(0, 180, 255, 0.2);
+            border-radius: 50%;
+            animation: driftParticle 14s infinite alternate ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+        }
+        @keyframes driftParticle {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            50% { opacity: 0.5; transform: translateY(-35vh) scale(1.1); }
+            100% { transform: translateY(-70vh) scale(1.4); opacity: 0; }
+        }
+        .light-trail {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffb3, #0088ff, transparent);
+            border-radius: 50%;
+            animation: trailMove 8s infinite linear;
+        }
+        @keyframes trailMove {
+            0% { transform: translateX(-20vw) rotate(15deg); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateX(120vw) rotate(15deg); opacity: 0; }
         }
 
-        table, th, td {
-            border: 1px solid #ddd;
+        /* Contenedor principal */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 1.5rem 3rem;
+            position: relative;
+            z-index: 5;
         }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #e6ffe6;
-            color: #2e8b57;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
+        /* Hero: título con estilo tecnológico */
+        .hero {
             text-align: center;
-            padding: 20px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            margin-top: 30px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.9s ease-out;
         }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        .callout {
-            background-color: #e0f2f7; /* Azul claro para destacar información */
-            border-left: 5px solid #2196F3;
-            padding: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .callout p {
-            margin: 0;
-            color: #0d47a1;
-            font-weight: bold;
-        }
-
-        /* Estilos Responsivos */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
             }
-
-            header p {
-                font-size: 1em;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-            }
-
-            .main-content {
-                padding: 15px;
-            }
-
-            section {
-                padding: 15px;
-            }
-
-            section h2 {
-                font-size: 1.8em;
-            }
-
-            section h3 {
-                font-size: 1.4em;
-            }
-
-            .image-gallery {
-                grid-template-columns: 1fr;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #00ff88, #00ccff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        .hero p {
+            background: rgba(0, 40, 60, 0.6);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            padding: 0.5rem 1.6rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            border: 1px solid #00ccff;
+            margin-top: 10px;
+            color: #b8e6ff;
+        }
 
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
             .container {
-                width: 95%;
-                margin: 10px auto;
+                padding-top: 4.5rem;
             }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+        }
 
-            header {
-                padding: 20px 10px;
-            }
+        /* ===== TARJETAS CON DISEÑO TECNOLÓGICO ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0 2rem;
+        }
+        .info-card {
+            background: linear-gradient(135deg, rgba(0, 40, 70, 0.8), rgba(0, 60, 50, 0.7));
+            backdrop-filter: blur(15px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #00ccff;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 200, 255, 0.1);
+            text-align: center;
+            animation: cardPulse 4s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 200, 0.05), transparent);
+            transform: rotate(45deg);
+            animation: cardShine 3s infinite;
+        }
+        @keyframes cardShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        @keyframes cardPulse {
+            0% { box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 200, 255, 0.1); border-color: #00ccff; }
+            100% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 255, 136, 0.2); border-color: #00ff88; }
+        }
+        .info-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .info-card:hover {
+            transform: translateY(-8px);
+            border-color: #00ff88;
+            background: linear-gradient(135deg, rgba(0, 60, 80, 0.9), rgba(0, 80, 60, 0.8));
+            animation-play-state: paused;
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.7rem;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .info-card:hover .card-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .info-card h3 {
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+            color: #00ffcc;
+            position: relative;
+            z-index: 1;
+        }
+        .card-preview {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 0.7rem;
+            color: #b8e6ff;
+            position: relative;
+            z-index: 1;
+        }
+        /* Contenido expandible */
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+            background: rgba(0, 30, 50, 0.9);
+            border-radius: 1rem;
+            margin-top: 0;
+            padding: 0 0.8rem;
+            text-align: left;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            border-left: 3px solid #00ff88;
+            position: relative;
+            z-index: 1;
+        }
+        .expandable-content.show {
+            max-height: 400px;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            overflow-y: auto;
+        }
+        .expandable-content i {
+            margin-right: 6px;
+            color: #00ffcc;
+        }
 
-            header h1 {
-                font-size: 2em;
-            }
-
-            section {
-                padding: 10px;
-            }
+        /* Créditos con estilo tecnológico */
+        .credits-section {
+            margin: 2rem 0 1.5rem;
+            text-align: center;
+            animation: fadeInUp 0.9s ease-out;
+            background: rgba(0, 30, 50, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid #00ccff;
+        }
+        .credit-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0.5rem 0;
+            letter-spacing: 1px;
+        }
+        .school-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #00ff88, #00ccff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            animation: schoolGlow 2s infinite alternate;
+            letter-spacing: 2px;
+        }
+        @keyframes schoolGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5)); }
+            100% { filter: drop-shadow(0 0 25px rgba(0, 200, 255, 0.8)); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🐢 Todo Sobre las Tortugas 🐢</h1>
-            <p>Descubre el fascinante mundo de estos antiguos reptiles: su biología, hábitats, especies y conservación.</p>
-        </header>
 
-        <nav>
-            <ul>
-                <li><a href="#introduccion">Introducción</a></li>
-                <li><a href="#biologia">Biología y Anatomía</a></li>
-                <li><a href="#tipos">Tipos y Especies</a></li>
-                <li><a href="#habitat">Hábitat y Distribución</a></li>
-                <li><a href="#dieta">Dieta y Comportamiento</a></li>
-                <li><a href="#reproduccion">Reproducción y Ciclo de Vida</a></li>
-                <li><a href="#conservacion">Conservación y Amenazas</a></li>
-                <li><a href="#curiosidades">Curiosidades</a></li>
-                <li><a href="#galeria">Galería</a></li>
-            </ul>
-        </nav>
+<!-- IMÁGENES DE FONDO FLOTANTES -->
+<div class="floating-bg-images">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tecnología Cloud" class="floating-bg-img">
+    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Servidores Cloud" class="floating-bg-img">
+</div>
 
-        <main class="main-content">
-            <section id="introduccion">
-                <h2>Introducción al Mundo de las Tortugas</h2>
-                <p>Las tortugas son reptiles pertenecientes al orden de los Testudines, caracterizados por poseer un caparazón especial que protege su cuerpo de depredadores y elementos. Han existido por más de 200 millones de años, lo que las convierte en uno de los grupos de vertebrados más antiguos, habiendo sobrevivido a eventos de extinción masiva que eliminaron a muchas otras formas de vida.</p>
-                <p>Se encuentran en una vasta gama de hábitats, desde océanos profundos hasta desiertos áridos, y su tamaño varía enormemente, desde pequeñas tortugas de pantano de unos pocos centímetros hasta gigantescas tortugas marinas de más de dos metros de largo y varios cientos de kilogramos de peso.</p>
-                <div class="callout">
-                    <p><strong>Dato Curioso:</strong> El caparazón de una tortuga no es solo un escudo; es una parte integral de su esqueleto, formado por huesos fusionados a sus costillas y vértebras.</p>
-                </div>
-            </section>
+<!-- RAYOS DE LUZ TECNOLÓGICOS -->
+<div class="tech-rays-bg">
+    <div class="tech-ray" style="left: 10%;"></div>
+    <div class="tech-ray" style="left: 25%;"></div>
+    <div class="tech-ray" style="left: 40%;"></div>
+    <div class="tech-ray" style="left: 55%;"></div>
+    <div class="tech-ray" style="left: 70%;"></div>
+    <div class="tech-ray" style="left: 85%;"></div>
+    <div class="tech-ray" style="left: 15%; animation-duration: 12s;"></div>
+    <div class="tech-ray" style="left: 35%; animation-duration: 7s;"></div>
+    <div class="tech-ray" style="left: 50%; animation-duration: 9s;"></div>
+    <div class="tech-ray" style="left: 65%; animation-duration: 11s;"></div>
+    <div class="tech-ray" style="left: 80%; animation-duration: 8s;"></div>
+    <div class="tech-ray" style="left: 95%; animation-duration: 13s;"></div>
+</div>
 
-            <section id="biologia">
-                <h2>Biología y Anatomía Única</h2>
-                <p>La característica más distintiva de las tortugas es, sin duda, su caparazón. Este no es una simple coraza, sino una estructura ósea compleja y altamente especializada que es parte de su esqueleto. Se divide en dos partes principales:</p>
-                <ul>
-                    <li><strong>Caparazón dorsal (carapacho):</strong> La parte superior, generalmente abovedada, que protege la espalda.</li>
-                    <li><strong>Plastrón ventral:</strong> La parte plana o ligeramente cóncava que cubre el vientre.</li>
-                </ul>
-                <p>Ambas partes están conectadas por un "puente" óseo en los lados. El caparazón está cubierto por placas córneas llamadas escudos, aunque algunas especies, como las tortugas laúd, tienen piel coriácea en lugar de escudos.</p>
+<div class="animated-bg" id="leafBg"></div>
 
-                <h3>Adaptaciones Fisiológicas</h3>
-                <p>Las tortugas han desarrollado una serie de adaptaciones impresionantes:</p>
-                <ul>
-                    <li><strong>Respiración:</strong> Debido a su caparazón rígido, las tortugas no pueden expandir y contraer su pecho como otros animales. En su lugar, utilizan músculos especiales que mueven sus órganos internos, permitiendo que los pulmones se expandan y contraigan. Algunas tortugas acuáticas pueden incluso absorber oxígeno a través de la piel alrededor de su cloaca (respiración cloacal).</li>
-                    <li><strong>Termorregulación:</strong> Son animales ectotérmicos (de sangre fría), lo que significa que dependen de fuentes externas de calor para regular su temperatura corporal. Esto las lleva a "tomar el sol" para calentarse y buscar sombra o agua para enfriarse.</li>
-                    <li><strong>Longevidad:</strong> Muchas especies de tortugas son conocidas por su impresionante longevidad. Algunas tortugas terrestres gigantes pueden vivir más de 100 años, e incluso las tortugas marinas pueden superar los 80 años.</li>
-                </ul>
-            </section>
-
-            <section id="tipos">
-                <h2>Tipos y Especies Principales</h2>
-                <p>El orden Testudines se divide principalmente en dos subórdenes:</p>
-                <ol>
-                    <li><strong>Cryptodira (Tortugas de cuello oculto):</strong> La mayoría de las tortugas terrestres y marinas pertenecen a este grupo. Retraen su cabeza y cuello directamente hacia atrás en el caparazón, doblando el cuello en forma de "S".</li>
-                    <li><strong>Pleurodira (Tortugas de cuello lateral):</strong> Principalmente tortugas de agua dulce del hemisferio sur. Retraen su cabeza y cuello doblando el cuello hacia un lado, debajo del borde del caparazón.</li>
-                </ol>
-
-                <h3>Clasificación por Hábitat</h3>
-                <p>Para una comprensión más sencilla, las tortugas se suelen clasificar en tres grupos principales según su hábitat:</p>
-                <ul>
-                    <li>
-                        <h4>Tortugas Terrestres (Testudinidae)</h4>
-                        <p>Viven exclusivamente en tierra. Tienen caparazones altos y patas robustas y cilíndricas, a menudo con dedos cortos y uñas fuertes, ideales para caminar y excavar. Son herbívoras o omnívoras.</p>
-                        <ul>
-                            <li>Ejemplos:
-                                <ul>
-                                    <li><strong>Tortuga Galápagos (<em>Chelonoidis nigra</em>):</strong> Las más grandes del mundo, conocidas por su extrema longevidad.</li>
-                                    <li><strong>Tortuga Mediterránea (<em>Testudo hermanni</em>):</strong> Común en Europa, popular como mascota.</li>
-                                    <li><strong>Tortuga Leopardo (<em>Stigmochelys pardalis</em>):</strong> Originaria de África, con un hermoso patrón en su caparazón.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h4>Tortugas de Agua Dulce (Varias familias, como Emydidae, Geoemydidae, Chelydridae)</h4>
-                        <p>Habitan ríos, lagos, estanques y pantanos. Suelen tener caparazones más planos y patas palmeadas con garras, que les permiten nadar con facilidad y moverse en tierra. Su dieta es muy variada.</p>
-                        <ul>
-                            <li>Ejemplos:
-                                <ul>
-                                    <li><strong>Tortuga de Orejas Rojas (<em>Trachemys scripta elegans</em>):</strong> Una de las tortugas de mascota más comunes, aunque invasora en muchas regiones.</li>
-                                    <li><strong>Tortuga Mordedora (<em>Chelydra serpentina</em>):</strong> Famosa por su poderosa mordida y su caparazón rugoso.</li>
-                                    <li><strong>Tortuga Caimán (<em>Macrochelys temminckii</em>):</strong> La tortuga de agua dulce más grande de América del Norte, con un aspecto prehistórico.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h4>Tortugas Marinas (Cheloniidae y Dermochelyidae)</h4>
-                        <p>Pasan casi toda su vida en el océano, solo las hembras regresan a la tierra para anidar. Sus patas delanteras se han transformado en aletas grandes y potentes para nadar. No pueden retraer sus cabezas o aletas completamente en sus caparazones.</p>
-                        <ul>
-                            <li>Ejemplos:
-                                <ul>
-                                    <li><strong>Tortuga Verde (<em>Chelonia mydas</em>):</strong> Herbívora en su etapa adulta, crucial para los ecosistemas de pastos marinos.</li>
-                                    <li><strong>Tortuga Boba (<em>Caretta caretta</em>):</strong> Conocida por su gran cabeza y mandíbulas fuertes para triturar crustáceos.</li>
-                                    <li><strong>Tortuga Laúd (<em>Dermochelys coriacea</em>):</strong> La tortuga más grande del mundo, única por su caparazón de piel coriácea en lugar de escudos óseos.</li>
-                                    <li><strong>Tortuga Carey (<em>Eretmochelys imbricata</em>):</strong> Valiosa por su hermoso caparazón, lo que la hace vulnerable al tráfico ilegal.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-
-            <section id="habitat">
-                <h2>Hábitat y Distribución Geográfica</h2>
-                <p>La diversidad de tortugas se refleja en la amplia variedad de hábitats que ocupan a nivel mundial. Prácticamente todos los continentes, excepto la Antártida, albergan alguna especie de tortuga.</p>
-                <ul>
-                    <li><strong>Tortugas Terrestres:</strong> Se encuentran en una gama de ambientes terrestres, desde bosques tropicales y sabanas hasta desiertos y zonas montañosas. Requieren acceso a refugios, como madrigueras o vegetación densa, y fuentes de alimento y agua.</li>
-                    <li><strong>Tortugas de Agua Dulce:</strong> Prefieren cuerpos de agua lénticos (estancados) como lagos, estanques, pantanos y marismas, así como sistemas lóticos (fluyentes) como ríos y arroyos de movimiento lento. Necesitan lugares para tomar el sol (troncos, rocas) y una buena calidad de agua.</li>
-                    <li><strong>Tortugas Marinas:</strong> Habitan en los océanos tropicales y subtropicales de todo el mundo. Cada especie tiene preferencias por diferentes zonas oceánicas, desde aguas costeras poco profundas (pastos marinos, arrecifes de coral) hasta el océano abierto. Las hembras solo regresan a playas arenosas específicas para poner sus huevos.</li>
-                </ul>
-
-                <h3>Mapas de Distribución (Concepto)</h3>
-                <p>Aunque no se pueden incrustar mapas interactivos directamente en HTML simple, aquí se describiría la distribución global:</p>
-                <ul>
-                    <li><strong>Tortugas Terrestres:</strong> Muy distribuidas en África, Asia, América del Norte y del Sur, y algunas islas.</li>
-                    <li><strong>Tortugas de Agua Dulce:</strong> Presentes en casi todas las regiones templadas y tropicales del mundo.</li>
-                    <li><strong>Tortugas Marinas:</strong> Las tortugas marinas se encuentran en todos los océanos del mundo, excepto en las regiones polares. Cada especie tiene rutas migratorias complejas y zonas de anidación específicas.</li>
-                </ul>
-            </section>
-
-            <section id="dieta">
-                <h2>Dieta y Comportamiento</h2>
-                <p>La dieta de las tortugas es tan variada como sus hábitats y especies. Pueden ser herbívoras, carnívoras u omnívoras, dependiendo de la especie y su etapa de vida.</p>
-                <ul>
-                    <li><strong>Herbívoras:</strong> Muchas tortugas terrestres y algunas marinas (como la tortuga verde adulta) se alimentan principalmente de plantas, hojas, frutas, flores y pastos.</li>
-                    <li><strong>Carnívoras:</strong> Predominan entre las tortugas acuáticas. Consumen peces, insectos, crustáceos, moluscos, gusanos, anfibios e incluso pequeños mamíferos. La tortuga carey, por ejemplo, se especializa en esponjas marinas.</li>
-                    <li><strong>Omnívoras:</strong> Muchas tortugas de agua dulce y algunas terrestres tienen una dieta mixta. Consumen tanto material vegetal como animal, adaptándose a la disponibilidad de alimentos en su entorno.</li>
-                </ul>
-
-                <h3>Comportamiento</h3>
-                <ul>
-                    <li><strong>Hibernación/Estivación:</strong> Las tortugas de zonas templadas a menudo hibernan durante los meses fríos, enterrándose o sumergiéndose en el barro. En climas cálidos y secos, pueden estivar (un estado de letargo similar) para sobrevivir a la sequía.</li>
-                    <li><strong>Basking (Tomar el sol):</strong> Las tortugas, especialmente las de agua dulce, pasan tiempo fuera del agua tomando el sol para elevar su temperatura corporal, lo que es crucial para la digestión y la salud general, y para eliminar parásitos.</li>
-                    <li><strong>Migración:</strong> Las tortugas marinas son famosas por sus largas migraciones entre sus zonas de alimentación y sus playas de anidación.</li>
-                    <li><strong>Excavación:</strong> Tanto las tortugas terrestres como las acuáticas excavan para crear nidos, refugios o para encontrar alimento.</li>
-                </ul>
-            </section>
-
-            <section id="reproduccion">
-                <h2>Reproducción y Ciclo de Vida</h2>
-                <p>La reproducción de las tortugas es ovípara, lo que significa que ponen huevos. El proceso generalmente sigue estos pasos:</p>
-                <ol>
-                    <li><strong>Cortejo y Apareamiento:</strong> Varian entre especies, pero a menudo involucran rituales de cortejo por parte del macho para atraer a la hembra.</li>
-                    <li><strong>Anidación:</strong> Después del apareamiento, la hembra se dirige a un lugar adecuado para poner sus huevos. Las tortugas marinas, por ejemplo, regresan a las mismas playas donde nacieron. Las tortugas terrestres y de agua dulce excavan nidos en el suelo.</li>
-                    <li><strong>Puesta de Huevos:</strong> La hembra excava un nido con sus patas traseras y deposita una "puesta" de huevos. El número de huevos varía mucho según la especie (desde unos pocos hasta más de cien). Una vez puestos, la hembra cubre el nido con arena o tierra y lo camufla, luego se va. No hay cuidado parental después de la puesta.</li>
-                    <li><strong>Incubación:</strong> Los huevos se incuban bajo tierra, y la temperatura del nido a menudo determina el sexo de las crías (determinación del sexo dependiente de la temperatura - TSD). Temperaturas más cálidas suelen producir hembras, y temperaturas más frías, machos.</li>
-                    <li><strong>Eclosión y Emergencia:</strong> Después de un período de incubación (que puede durar de 60 a 120 días), las crías rompen el cascarón (eclosionan) utilizando un "diente de huevo" temporal. Emergen del nido juntas, a menudo por la noche para evitar depredadores y el calor del sol.</li>
-                    <li><strong>Crecimiento:</strong> Las tortugas jóvenes son vulnerables a numerosos depredadores. Crecen lentamente y alcanzan la madurez sexual después de varios años, o incluso décadas en el caso de las tortugas gigantes.</li>
-                </ol>
-                <p>El ciclo de vida de una tortuga es un testimonio de resiliencia y adaptación, aunque la alta mortalidad juvenil es un desafío constante.</p>
-            </section>
-
-            <section id="conservacion">
-                <h2>Conservación y Amenazas</h2>
-                <p>Lamentablemente, muchas especies de tortugas están en peligro o amenazadas debido a diversas actividades humanas y cambios ambientales. Las amenazas principales incluyen:</p>
-                <ul>
-                    <li><strong>Pérdida y Degradación del Hábitat:</strong> La urbanización, la agricultura, la deforestación y el desarrollo costero destruyen y fragmentan los hábitats de las tortugas.</li>
-                    <li><strong>Caza Furtiva y Comercio Ilegal:</strong> Las tortugas son cazadas por su carne, huevos y caparazones (especialmente la carey para el "carey"), y también para el comercio de mascotas exóticas.</li>
-                    <li><strong>Contaminación:</strong> La contaminación plástica es una amenaza masiva para las tortugas marinas, que confunden las bolsas de plástico con medusas (su alimento). Los derrames de petróleo y los productos químicos también afectan a todas las especies.</li>
-                    <li><strong>Cambio Climático:</strong> El aumento del nivel del mar, las tormentas más intensas y los cambios en la temperatura afectan las playas de anidación. La determinación del sexo dependiente de la temperatura significa que el calentamiento global podría llevar a poblaciones desequilibradas con demasiadas hembras.</li>
-                    <li><strong>Pesca Accidental (Bycatch):</strong> Las tortugas marinas se enredan en redes de pesca y otros artes de pesca, lo que a menudo lleva a su ahogamiento.</li>
-                    <li><strong>Especies Invasoras:</strong> En algunos lugares, especies introducidas (como ratas o perros) depredan los huevos y las crías.</li>
-                </ul>
-
-                <h3>Esfuerzos de Conservación</h3>
-                <p>Se están llevando a cabo numerosos esfuerzos a nivel global para proteger a las tortugas:</p>
-                <ul>
-                    <li><strong>Protección Legal:</strong> Muchas especies están protegidas por leyes nacionales e internacionales (como CITES).</li>
-                    <li><strong>Creación de Áreas Protegidas:</strong> Establecimiento de parques nacionales, reservas marinas y santuarios de vida silvestre.</li>
-                    <li><strong>Programas de Cría en Cautiverio y Reintroducción:</strong> Para especies críticamente amenazadas.</li>
-                    <li><strong>Reducción de la Pesca Accidental:</strong> Desarrollo de dispositivos de exclusión de tortugas (TEDs) en redes de arrastre.</li>
-                    <li><strong>Educación y Concienciación Pública:</strong> Vital para cambiar el comportamiento humano y fomentar el respeto por estos animales.</li>
-                    <li><strong>Vigilancia y Protección de Nidos:</strong> En playas clave de anidación para proteger huevos y crías.</li>
-                </ul>
-                <div class="callout">
-                    <p><strong>¿Cómo puedes ayudar?</strong> No compres productos derivados de tortugas, reduce tu consumo de plástico, apoya a organizaciones de conservación y educa a otros sobre la importancia de las tortugas.</p>
-                </div>
-            </section>
-
-            <section id="curiosidades">
-                <h2>Curiosidades Fascinantes de las Tortugas</h2>
-                <ul>
-                    <li><strong>"Diente" de Huevo:</strong> Las crías de tortuga tienen una pequeña protuberancia afilada en su pico llamada "diente de huevo", que utilizan para romper el cascarón. Este diente se cae poco después de la eclosión.</li>
-                    <li><strong>Lágrimas Saladas:</strong> Las tortugas marinas parecen "llorar" mientras anidan. En realidad, están excretando el exceso de sal a través de glándulas especiales cerca de sus ojos.</li>
-                    <li><strong>Caparazones Únicos:</strong> No hay dos caparazones de tortuga exactamente iguales, similar a las huellas dactilares humanas.</li>
-                    <li><strong>Respiración Anal:</strong> Algunas tortugas de agua dulce pueden realizar una "respiración cloacal" (o "respiración anal"), absorbiendo oxígeno del agua a través de membranas en su cloaca. Esto les permite permanecer sumergidas por períodos más largos.</li>
-                    <li><strong>La Tortuga Más Rápida:</strong> Aunque lentas en tierra, las tortugas marinas son nadadores increíblemente rápidos. La tortuga laúd puede alcanzar velocidades de hasta 35 km/h en el agua.</li>
-                    <li><strong>Pescadores con Cebo:</strong> Algunas tortugas, como la tortuga caimán, tienen una pequeña protuberancia en su lengua que parece un gusano, que usan para atraer peces directamente a su boca.</li>
-                </ul>
-            </section>
-
-            <section id="galeria">
-                <h2>Galería de Imágenes de Tortugas</h2>
-                <div class="image-gallery">
-                    <img src="https://via.placeholder.com/300x200?text=Tortuga+Galapagos" alt="Tortuga Galápagos gigante">
-                    <img src="https://via.placeholder.com/300x200?text=Tortuga+Marina+Verde" alt="Tortuga marina verde nadando">
-                    <img src="https://via.placeholder.com/300x200?text=Tortuga+Orejas+Rojas" alt="Tortuga de orejas rojas en un tronco">
-                    <img src="https://via.placeholder.com/300x200?text=Tortuga+Laud" alt="Tortuga laúd subiendo a la playa">
-                    <img src="https://via.placeholder.com/300x200?text=Tortuga+Mordedora" alt="Primer plano de tortuga mordedora">
-                    <img src="https://via.placeholder.com/300x200?text=Tortuga+Carey" alt="Tortuga carey en arrecife">
-                </div>
-                <p style="text-align: center; font-style: italic; margin-top: 20px;">(Nota: Las imágenes son marcadores de posición. Reemplaza `https://via.placeholder.com/...` con URLs de imágenes reales de tortugas).</p>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 Todo Sobre las Tortugas. Todos los derechos reservados.</p>
-            <p>Página creada con fines educativos.</p>
-        </footer>
+<div class="container">
+    <div class="hero">
+        <h1>☁️ CLOUD COMPUTING ☁️</h1>
+        <p><i class="fas fa-hand-pointer"></i> Haz clic en cada recuadro → se despliega información</p>
     </div>
+
+    <!-- 6 RECUADROS DE CLOUD COMPUTING -->
+    <div class="cards-grid">
+        <div class="info-card" data-card="1">
+            <div class="card-icon"><i class="fas fa-cloud"></i></div>
+            <h3>IaaS</h3>
+            <div class="card-preview">Infraestructura como Servicio · Haz clic</div>
+            <div class="expandable-content" id="expand1">
+                <p><i class="fas fa-server"></i> <strong>Infraestructura como Servicio:</strong> Proporciona recursos de computación virtualizados a través de internet. AWS EC2, Azure VMs y Google Compute Engine permiten escalar infraestructura bajo demanda. Ideal para migración de servidores físicos a la nube.</p>
+            </div>
+        </div>
+        <div class="info-card" data-card="2">
+            <div class="card-icon"><i class="fas fa-cubes"></i></div>
+            <h3>PaaS</h3>
+            <div class="card-preview">Plataforma como Servicio · Pulsa</div>
+            <div class="expandable-content" id="expand2">
+                <p><i class="fas fa-code"></i> <strong>Plataforma como Servicio:</strong> Entorno completo para desarrollo y despliegue de aplicaciones sin gestionar infraestructura. Google App Engine, Heroku y Azure App Service facilitan CI/CD. Soporta múltiples lenguajes: Python, Node.js, Java, Go.</p>
+            </div>
+        </div>
+        <div class="info-card" data-card="3">
+            <div class="card-icon"><i class="fas fa-desktop"></i></div>
+            <h3>SaaS</h3>
+            <div class="card-preview">Software como Servicio · Click</div>
+            <div class="expandable-content" id="expand3">
+                <p><i class="fas fa-globe"></i> <strong>Software como Servicio:</strong> Aplicaciones listas para usar accesibles vía web. Microsoft 365, Salesforce, Google Workspace. Actualizaciones automáticas, pago por suscripción, accesible desde cualquier dispositivo con internet.</p>
+            </div>
+        </div>
+        <div class="info-card" data-card="4">
+            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Seguridad Cloud</h3>
+            <div class="card-preview">Protección de datos · Expande</div>
+            <div class="expandable-content" id="expand4">
+                <p><i class="fas fa-lock"></i> <strong>Cloud Security:</strong> Encriptación AES-256, autenticación multifactor, firewalls de próxima generación. Modelo de responsabilidad compartida. Cumplimiento GDPR, HIPAA, ISO 27001. Zero Trust Architecture para protección avanzada.</p>
+            </div>
+        </div>
+        <div class="info-card" data-card="5">
+            <div class="card-icon"><i class="fas fa-brain"></i></div>
+            <h3>AI & Machine Learning</h3>
+            <div class="card-preview">Inteligencia Artificial Cloud · Más</div>
+            <div class="expandable-content" id="expand5">
+                <p><i class="fas fa-robot"></i> <strong>AI/ML en la Nube:</strong> AWS SageMaker, Google AI Platform, Azure ML. Entrenamiento de modelos con GPU/TPU. APIs pre-entrenadas para visión, lenguaje natural, predicciones. Escalabilidad para big data y deep learning.</p>
+            </div>
+        </div>
+        <div class="info-card" data-card="6">
+            <div class="card-icon"><i class="fas fa-server"></i></div>
+            <h3>Edge Computing</h3>
+            <div class="card-preview">Procesamiento descentralizado · Haz clic</div>
+            <div class="expandable-content" id="expand6">
+                <p><i class="fas fa-microchip"></i> <strong>Edge Computing:</strong> Procesamiento de datos cerca de la fuente. AWS Wavelength, Azure Edge Zones. Reducción de latencia para IoT, vehículos autónomos, smart cities. Complementa el cloud centralizado con nodos distribuidos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRÉDITOS -->
+    <div class="credits-section">
+        <div class="credit-name">Erick Esquivel Mendoza</div>
+        <div class="credit-name">Melissa Bermúdez Ramírez</div>
+        <div class="school-name">CBTa 181</div>
+    </div>
+</div>
+
+<script>
+    // ===== 1. EXPANSIÓN DE TARJETAS AL HACER CLIC (SOLO UNA A LA VEZ) =====
+    const cards = document.querySelectorAll('.info-card');
+    cards.forEach(card => {
+        const expandDiv = card.querySelector('.expandable-content');
+        if(expandDiv) expandDiv.classList.remove('show');
+
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Cerrar todos los demás recuadros primero
+            cards.forEach(otherCard => {
+                const otherExpand = otherCard.querySelector('.expandable-content');
+                if(otherExpand && otherExpand !== expandDiv && otherExpand.classList.contains('show')) {
+                    otherExpand.classList.remove('show');
+                }
+            });
+            
+            // Alternar el recuadro actual
+            expandDiv.classList.toggle('show');
+            
+            // Retroalimentación visual mejorada
+            card.style.transform = 'scale(0.95)';
+            card.style.borderColor = '#00ff88';
+            card.style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.4)';
+            setTimeout(() => { 
+                card.style.transform = ''; 
+                card.style.borderColor = '';
+                card.style.boxShadow = '';
+            }, 200);
+        });
+    });
+
+    // ===== 2. REVELADO DE TARJETAS AL SCROLL =====
+    const revealCards = document.querySelectorAll('.info-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+    revealCards.forEach(card => observer.observe(card));
+
+    // ===== 3. FONDO CON ELEMENTOS TECNOLÓGICOS =====
+    function generateBackground() {
+        const container = document.getElementById('leafBg');
+        // Partículas tecnológicas flotantes
+        for(let i=0; i<60; i++) {
+            let leaf = document.createElement('div');
+            leaf.classList.add('floating-leaf');
+            let size = Math.random() * 45 + 15;
+            leaf.style.width = `${size}px`;
+            leaf.style.height = `${size}px`;
+            leaf.style.left = `${Math.random() * 100}%`;
+            leaf.style.animationDuration = `${Math.random() * 14 + 7}s`;
+            leaf.style.animationDelay = `${Math.random() * 12}s`;
+            leaf.style.opacity = Math.random() * 0.45 + 0.1;
+            container.appendChild(leaf);
+        }
+        // Nodos de red brillantes
+        for(let i=0; i<40; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('soft-particle');
+            particle.style.width = `${Math.random() * 8 + 2}px`;
+            particle.style.height = particle.style.width;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 16 + 6}s`;
+            particle.style.animationDelay = `${Math.random() * 10}s`;
+            container.appendChild(particle);
+        }
+        // Estelas de datos
+        for(let i=0; i<15; i++) {
+            let trail = document.createElement('div');
+            trail.classList.add('light-trail');
+            trail.style.top = `${Math.random() * 100}%`;
+            trail.style.animationDuration = `${Math.random() * 10 + 6}s`;
+            trail.style.animationDelay = `${Math.random() * 8}s`;
+            container.appendChild(trail);
+        }
+    }
+    generateBackground();
+
+    // Revelado anticipado
+    setTimeout(() => {
+        revealCards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 80) card.classList.add('reveal');
+        });
+    }, 150);
+
+    // ===== 4. EFECTO DE CLIC FUERA PARA CERRAR =====
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.info-card')) {
+            cards.forEach(card => {
+                const expandDiv = card.querySelector('.expandable-content');
+                if(expandDiv && expandDiv.classList.contains('show')) {
+                    expandDiv.classList.remove('show');
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>
