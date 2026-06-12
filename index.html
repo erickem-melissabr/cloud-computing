@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>Cloud Computing | Verde Bandera & Azul Tecnología</title>
-    <!-- Fuentes -->
+    <title>Cloud Computing | CBTa 181</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -37,48 +36,32 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== OPTIMIZACIÓN PARA DISPOSITIVOS DE GAMA BAJA ===== */
-        @media (max-width: 768px) {
-            .tech-ray { animation-duration: 15s !important; }
-            .floating-bg-img { animation-duration: 25s !important; }
-        }
-
-        /* ===== INTRO ANIMATION ÉPICA (CORREGIDA SIN BUG DE LÍNEA) ===== */
-        .intro-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            pointer-events: none;
-        }
+        /* ===== INTRO ANIMATION CORREGIDA ===== */
         .intro-split-left, .intro-split-right {
             position: fixed;
             top: 0;
             width: 50%;
             height: 100%;
-            background: var(--azul-oscuro);
+            background: #00111f;
             z-index: 10000;
             pointer-events: none;
+            will-change: transform;
         }
         .intro-split-left {
             left: 0;
-            background: linear-gradient(135deg, #001a33 0%, #002244 100%);
-            animation: splitLeft 1s cubic-bezier(0.77, 0, 0.175, 1) 2.5s forwards;
+            animation: splitLeft 0.8s cubic-bezier(0.7, 0, 0.3, 1) 2.2s forwards;
         }
         .intro-split-right {
             right: 0;
-            background: linear-gradient(225deg, #001a33 0%, #002244 100%);
-            animation: splitRight 1s cubic-bezier(0.77, 0, 0.175, 1) 2.5s forwards;
+            animation: splitRight 0.8s cubic-bezier(0.7, 0, 0.3, 1) 2.2s forwards;
         }
         @keyframes splitLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-110%); }
+            from { transform: translateX(0); }
+            to { transform: translateX(-105%); }
         }
         @keyframes splitRight {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(110%); }
+            from { transform: translateX(0); }
+            to { transform: translateX(105%); }
         }
         .intro-center-content {
             position: fixed;
@@ -88,52 +71,42 @@
             z-index: 10001;
             text-align: center;
             pointer-events: none;
-            animation: introFadeOut 0.6s ease-in-out 2.8s forwards;
+            animation: introFadeOut 0.3s ease-in-out 1.9s forwards;
         }
         @keyframes introFadeOut {
-            to { opacity: 0; }
+            to { opacity: 0; visibility: hidden; }
         }
         .intro-logo {
-            font-size: 6rem;
-            background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: introGlow 0.4s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.8));
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--verde-brillante);
+            text-shadow: 0 0 40px rgba(0,255,136,0.6);
+            animation: logoPulse 0.6s ease-in-out infinite alternate;
+        }
+        @keyframes logoPulse {
+            from { transform: scale(1); text-shadow: 0 0 30px rgba(0,255,136,0.4); }
+            to { transform: scale(1.08); text-shadow: 0 0 50px rgba(0,200,255,0.8); }
         }
         .intro-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            background: linear-gradient(135deg, #fff, var(--cyan), var(--verde-brillante));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 4px;
-            animation: introTextPulse 1s ease-in-out infinite alternate;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0,200,255,0.5);
         }
         .intro-subtext {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.5rem;
-            color: var(--cyan);
-            letter-spacing: 6px;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #fff;
+            letter-spacing: 5px;
             margin-top: 1rem;
             opacity: 0;
-            animation: introSubFade 0.8s ease-out 0.8s forwards;
-        }
-        @keyframes introGlow {
-            from { filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.6)); }
-            to { filter: drop-shadow(0 0 60px rgba(0, 200, 255, 1)); }
-        }
-        @keyframes introTextPulse {
-            from { transform: scale(1); letter-spacing: 4px; }
-            to { transform: scale(1.05); letter-spacing: 6px; }
+            animation: introSubFade 0.6s ease-out 0.6s forwards;
         }
         @keyframes introSubFade {
-            to { opacity: 1; }
+            to { opacity: 0.8; }
         }
 
-        /* ===== IMÁGENES DE FONDO FLOTANTES ===== */
+        /* ===== IMÁGENES DE FONDO ===== */
         .floating-bg-images {
             position: fixed;
             top: 0;
@@ -147,28 +120,28 @@
         .floating-bg-img {
             position: absolute;
             border-radius: 20px;
-            opacity: 0.08;
-            filter: brightness(0.7) saturate(1.3);
-            animation: floatBgImage 25s infinite ease-in-out;
+            opacity: 0.07;
+            filter: brightness(0.6) saturate(1.2);
             will-change: transform;
+            animation: floatSlow 20s ease-in-out infinite;
         }
         .floating-bg-img:nth-child(1) {
-            top: 5%;
-            left: 3%;
-            width: 350px;
-            height: 250px;
+            top: 8%;
+            left: 4%;
+            width: 280px;
+            height: 190px;
         }
         .floating-bg-img:nth-child(2) {
-            bottom: 10%;
-            right: 5%;
-            width: 400px;
-            height: 300px;
-            animation-delay: -12s;
+            bottom: 12%;
+            right: 6%;
+            width: 320px;
+            height: 230px;
+            animation-delay: -10s;
+            animation-direction: reverse;
         }
-        @keyframes floatBgImage {
-            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            33% { transform: translate(20px, -15px) rotate(1deg) scale(1.05); }
-            66% { transform: translate(-15px, 10px) rotate(-0.5deg) scale(0.95); }
+        @keyframes floatSlow {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(15px, -10px) rotate(2deg); }
         }
 
         /* ===== RAYOS DE LUZ ===== */
@@ -184,16 +157,21 @@
         }
         .tech-ray {
             position: absolute;
-            width: 2px;
-            height: 120%;
-            background: linear-gradient(to bottom, transparent, rgba(0,255,136,0.15) 30%, rgba(0,200,255,0.25) 60%, transparent);
-            animation: moveRay linear infinite;
+            width: 1px;
+            height: 130%;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0,255,136,0.2) 30%, 
+                rgba(0,200,255,0.3) 50%, 
+                rgba(0,255,136,0.2) 70%, 
+                transparent 100%);
             filter: blur(1px);
             will-change: transform;
+            animation: moveRay 12s linear infinite;
         }
         @keyframes moveRay {
-            0% { transform: translateX(-100vw); }
-            100% { transform: translateX(110vw); }
+            0% { transform: translateX(-100vw) rotate(5deg); }
+            100% { transform: translateX(110vw) rotate(5deg); }
         }
 
         /* ===== PARTÍCULAS ===== */
@@ -211,14 +189,14 @@
             position: absolute;
             background: var(--verde-brillante);
             border-radius: 50%;
-            animation: particleFloat linear infinite;
-            box-shadow: 0 0 6px rgba(0,255,136,0.5);
+            box-shadow: 0 0 8px rgba(0,255,136,0.6), 0 0 20px rgba(0,200,255,0.3);
             will-change: transform, opacity;
+            animation: particleRise 10s linear infinite;
         }
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.3; }
+        @keyframes particleRise {
+            0% { transform: translateY(105vh) scale(0); opacity: 0; }
+            15% { opacity: 0.9; }
+            50% { opacity: 0.4; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
@@ -229,71 +207,60 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(0, 20, 40, 0.85);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 20, 40, 0.9);
+            backdrop-filter: blur(10px);
             border-bottom: 2px solid var(--verde-brillante);
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 0.8rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
             gap: 0.5rem;
         }
-        .navbar-logo-left, .navbar-logo-right {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
+        .navbar-logo-placeholder {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: rgba(255, 255, 255, 0.08);
             border: 2px dashed var(--cyan);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            flex-shrink: 0;
         }
-        .navbar-logo-left:hover, .navbar-logo-right:hover {
+        .navbar-logo-placeholder:hover {
             border-color: var(--verde-brillante);
             box-shadow: var(--neon-shadow);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
         }
-        .navbar-logo-left img, .navbar-logo-right img {
+        .navbar-logo-placeholder img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             border-radius: 8px;
         }
-        .navbar-logo-left i, .navbar-logo-right i {
+        .navbar-logo-placeholder i {
             color: var(--cyan);
-            font-size: 1.2rem;
-        }
-        .navbar-logo-left input[type="file"], .navbar-logo-right input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            font-size: 1.1rem;
         }
         .nav-links {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
             justify-content: center;
-            flex: 1;
+            align-items: center;
         }
         .nav-btn {
             background: var(--glass-light);
             border: 1px solid var(--cyan);
             color: #e0f0ff;
-            padding: 0.5rem 0.9rem;
-            border-radius: 25px;
+            padding: 0.4rem 0.7rem;
+            border-radius: 20px;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             white-space: nowrap;
             text-decoration: none;
@@ -303,14 +270,14 @@
             background: var(--verde-bandera);
             border-color: var(--verde-brillante);
             box-shadow: var(--neon-shadow);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         /* ===== CONTAINER ===== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 7rem 1.5rem 3rem;
+            padding: 6.5rem 1rem 2rem;
             position: relative;
             z-index: 5;
         }
@@ -318,51 +285,50 @@
         /* ===== HERO ===== */
         .hero {
             text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease-out;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease-out;
         }
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             background: linear-gradient(135deg, var(--verde-brillante), var(--cyan), var(--verde-brillante));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 900;
             letter-spacing: 2px;
-            text-shadow: 0 0 40px rgba(0,255,136,0.3);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
         .hero-subtitle {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--cyan);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             background: rgba(0,30,60,0.6);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
             display: inline-block;
-            padding: 0.6rem 2rem;
-            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
             border: 1px solid var(--cyan);
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== BOTONES DE NAVEGACIÓN PRINCIPAL ===== */
+        /* ===== BOTONES PRINCIPALES ===== */
         .main-nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 2rem;
         }
         .main-nav-card {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            border-radius: 1.5rem;
-            padding: 1.3rem;
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            padding: 1.2rem 1rem;
             border: 2px solid var(--cyan);
             cursor: pointer;
             transition: var(--transition);
@@ -372,36 +338,24 @@
             position: relative;
             overflow: hidden;
         }
-        .main-nav-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0,255,136,0.15), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .main-nav-card:hover::before { opacity: 1; }
         .main-nav-card:hover {
             border-color: var(--verde-brillante);
             box-shadow: var(--neon-shadow);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         .main-nav-card i {
-            font-size: 2.2rem;
+            font-size: 2rem;
             background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
         }
         .main-nav-card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--cyan);
             position: relative;
             z-index: 1;
@@ -410,33 +364,28 @@
         /* ===== SECCIONES ===== */
         .section {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            border-radius: 2rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             border: 1px solid var(--cyan);
-            animation: fadeInUp 0.6s ease-out;
+            animation: fadeInUp 0.5s ease-out;
         }
         .section h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             text-align: center;
         }
-        .section h3 {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.5rem;
-            color: var(--verde-brillante);
-            margin: 1.2rem 0 0.8rem;
-        }
         .section p, .section li {
-            line-height: 1.8;
+            line-height: 1.6;
             color: #c0d8f0;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
         }
         .section ul {
             list-style: none;
@@ -452,28 +401,28 @@
         .carousel-container {
             position: relative;
             overflow: hidden;
-            border-radius: 1.5rem;
-            margin: 1.5rem 0;
+            border-radius: 1.2rem;
+            margin: 1.2rem 0;
             border: 2px solid var(--cyan);
             box-shadow: var(--neon-shadow);
         }
         .carousel-track {
             display: flex;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
             will-change: transform;
         }
         .carousel-slide {
             min-width: 100%;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             background: var(--glass);
         }
         .carousel-slide img {
             max-width: 100%;
-            height: 300px;
+            height: 220px;
             object-fit: contain;
-            border-radius: 1rem;
-            margin-bottom: 1rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.8rem;
         }
         .carousel-btn {
             position: absolute;
@@ -482,33 +431,30 @@
             background: var(--verde-bandera);
             border: 2px solid var(--verde-brillante);
             color: white;
-            width: 45px;
-            height: 45px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             z-index: 10;
             transition: var(--transition);
         }
-        .carousel-btn:hover {
-            background: var(--azul-tech);
-            box-shadow: var(--neon-shadow);
-        }
-        .carousel-btn.prev { left: 15px; }
-        .carousel-btn.next { right: 15px; }
+        .carousel-btn:hover { background: var(--azul-tech); }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
 
         /* ===== GRID DE TARJETAS ===== */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
         }
         .info-card {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
             border: 1px solid var(--cyan);
             cursor: pointer;
             transition: var(--transition);
@@ -519,75 +465,73 @@
         .info-card:hover {
             border-color: var(--verde-brillante);
             box-shadow: var(--neon-shadow);
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
         .info-card i {
-            font-size: 2.2rem;
+            font-size: 2rem;
             background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
         .info-card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--cyan);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
         .expandable-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease;
+            transition: max-height 0.4s ease;
             background: rgba(0,20,40,0.8);
-            border-radius: 1rem;
+            border-radius: 0.8rem;
             margin-top: 0;
-            padding: 0 1rem;
+            padding: 0 0.8rem;
             text-align: left;
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.85rem;
+            line-height: 1.5;
             border-left: 3px solid var(--verde-brillante);
         }
         .expandable-content.show {
-            max-height: 500px;
-            margin-top: 1rem;
-            padding: 1rem;
+            max-height: 400px;
+            margin-top: 0.8rem;
+            padding: 0.8rem;
             overflow-y: auto;
         }
 
         /* ===== FORMULARIO ===== */
         .form-container {
             text-align: center;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
         }
         .forms-link-btn {
             display: inline-block;
             background: linear-gradient(135deg, var(--verde-bandera), var(--azul-tech));
             color: white;
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
+            padding: 1rem 2rem;
+            border-radius: 40px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-decoration: none;
             border: 2px solid var(--verde-brillante);
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         .forms-link-btn:hover {
-            box-shadow: var(--neon-shadow), 0 8px 25px rgba(0,255,136,0.3);
-            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--neon-shadow), 0 6px 20px rgba(0,255,136,0.3);
+            transform: translateY(-2px);
         }
-        .forms-link-btn i {
-            margin-right: 10px;
-        }
+        .forms-link-btn i { margin-right: 8px; }
 
         /* ===== MAPA ===== */
         .map-container {
-            border-radius: 1.5rem;
+            border-radius: 1.2rem;
             overflow: hidden;
             border: 2px solid var(--cyan);
-            height: 350px;
-            margin: 1.5rem 0;
+            height: 300px;
+            margin: 1.2rem 0;
         }
         .map-container iframe {
             width: 100%;
@@ -595,72 +539,79 @@
             border: none;
         }
 
-        /* ===== CRÉDITOS ===== */
+        /* ===== CRÉDITOS CON BÚHO ESTUDIOSO ===== */
         .credits-section {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             background: var(--glass);
-            border-radius: 2rem;
+            border-radius: 1.5rem;
             border: 2px solid var(--cyan);
-            animation: fadeInUp 0.8s ease-out;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        .credits-section .owl-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
         .credit-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             background: linear-gradient(135deg, var(--verde-brillante), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 0.4rem 0;
+            margin: 0.3rem 0;
             letter-spacing: 1px;
+        }
+        .credit-group {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            color: var(--cyan);
+            margin: 0.2rem 0;
+            letter-spacing: 2px;
         }
         .school-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             background: linear-gradient(135deg, var(--dorado), var(--verde-brillante));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 900;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             animation: schoolGlow 2s infinite alternate;
         }
         @keyframes schoolGlow {
-            from { filter: drop-shadow(0 0 8px rgba(0,255,136,0.4)); }
-            to { filter: drop-shadow(0 0 20px rgba(0,200,255,0.8)); }
+            from { filter: drop-shadow(0 0 6px rgba(0,255,136,0.3)); }
+            to { filter: drop-shadow(0 0 15px rgba(0,200,255,0.6)); }
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .navbar { padding: 0.5rem; flex-direction: column; gap: 0.3rem; }
-            .navbar-logo-left, .navbar-logo-right { width: 40px; height: 40px; }
-            .nav-btn { padding: 0.35rem 0.7rem; font-size: 0.7rem; }
-            .container { padding: 7.5rem 0.8rem 2rem; }
-            .section { padding: 1.2rem; }
-            .carousel-slide img { height: 200px; }
-            .intro-logo { font-size: 4rem; }
-            .intro-text { font-size: 2rem; }
-            .nav-links { order: 3; width: 100%; justify-content: center; }
+            .navbar { padding: 0.4rem 0.5rem; gap: 0.3rem; }
+            .navbar-logo-placeholder { width: 38px; height: 38px; min-width: 38px; }
+            .nav-btn { padding: 0.3rem 0.5rem; font-size: 0.65rem; }
+            .container { padding: 5.5rem 0.6rem 1.5rem; }
+            .section { padding: 1rem; border-radius: 1.2rem; }
+            .carousel-slide img { height: 150px; }
+            .nav-links { gap: 0.2rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- INTRO ANIMATION ÉPICA CORREGIDA -->
-<div class="intro-overlay" id="introOverlay">
-    <div class="intro-split-left" id="splitLeft"></div>
-    <div class="intro-split-right" id="splitRight"></div>
-    <div class="intro-center-content" id="introCenter">
-        <div class="intro-logo">☁️</div>
-        <div class="intro-text">CLOUD COMPUTING</div>
-        <div class="intro-subtext">VERDE BANDERA & AZUL TECNOLOGÍA</div>
-    </div>
+<!-- INTRO ANIMATION CORREGIDA -->
+<div class="intro-split-left" id="splitLeft"></div>
+<div class="intro-split-right" id="splitRight"></div>
+<div class="intro-center-content" id="introCenter">
+    <div class="intro-logo">☁️</div>
+    <div class="intro-text">CLOUD COMPUTING</div>
+    <div class="intro-subtext">CBTa 181</div>
 </div>
 
 <!-- IMÁGENES DE FONDO -->
 <div class="floating-bg-images">
-    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Cloud Tech" class="floating-bg-img" loading="lazy">
-    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600" alt="Data Center" class="floating-bg-img" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400" alt="Cloud Tech" class="floating-bg-img" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400" alt="Data Center" class="floating-bg-img" loading="lazy">
 </div>
 
 <!-- RAYOS DE LUZ -->
@@ -669,12 +620,10 @@
 <!-- PARTÍCULAS -->
 <div class="particles-bg" id="particlesBg"></div>
 
-<!-- NAVBAR CON IMÁGENES UNA EN CADA LADO -->
+<!-- NAVBAR -->
 <nav class="navbar">
-    <div class="navbar-logo-left" id="logoLeft">
+    <div class="navbar-logo-placeholder">
         <i class="fas fa-image"></i>
-        <input type="file" accept="image/*" onchange="loadLogo(event, 'logoPreviewLeft')" title="Cargar imagen izquierda">
-        <img id="logoPreviewLeft" alt="Logo Izquierdo" style="display:none;">
     </div>
     <div class="nav-links">
         <a href="#inicio" class="nav-btn active">Inicio</a>
@@ -688,73 +637,35 @@
         <a href="#terminos" class="nav-btn">Términos</a>
         <a href="#referencias" class="nav-btn">Referencias</a>
     </div>
-    <div class="navbar-logo-right" id="logoRight">
+    <div class="navbar-logo-placeholder">
         <i class="fas fa-image"></i>
-        <input type="file" accept="image/*" onchange="loadLogo(event, 'logoPreviewRight')" title="Cargar imagen derecha">
-        <img id="logoPreviewRight" alt="Logo Derecho" style="display:none;">
     </div>
 </nav>
 
 <div class="container" id="inicio">
-    <!-- HERO -->
     <div class="hero">
         <h1>☁️ CLOUD COMPUTING ☁️</h1>
-        <p class="hero-subtitle">INFORMÁTICA EN LA NUBE · VERDE BANDERA & AZUL TECNOLOGÍA</p>
+        <p class="hero-subtitle">INFORMÁTICA EN LA NUBE</p>
     </div>
 
-    <!-- BOTONES PRINCIPALES -->
     <div class="main-nav-grid">
-        <a href="#hibrida" class="main-nav-card">
-            <i class="fas fa-cloud-sun"></i>
-            <h3>Nube Híbrida</h3>
-        </a>
-        <a href="#publica" class="main-nav-card">
-            <i class="fas fa-globe-americas"></i>
-            <h3>Nube Pública</h3>
-        </a>
-        <a href="#privada" class="main-nav-card">
-            <i class="fas fa-lock"></i>
-            <h3>Nube Privada</h3>
-        </a>
-        <a href="#comunitaria" class="main-nav-card">
-            <i class="fas fa-users"></i>
-            <h3>Nube Comunitaria</h3>
-        </a>
-        <a href="#referencias" class="main-nav-card">
-            <i class="fas fa-book"></i>
-            <h3>Fuentes de Información</h3>
-        </a>
-        <a href="#formulario" class="main-nav-card">
-            <i class="fas fa-clipboard-check"></i>
-            <h3>Formulario de Experiencia</h3>
-        </a>
+        <a href="#hibrida" class="main-nav-card"><i class="fas fa-cloud-sun"></i><h3>Nube Híbrida</h3></a>
+        <a href="#publica" class="main-nav-card"><i class="fas fa-globe-americas"></i><h3>Nube Pública</h3></a>
+        <a href="#privada" class="main-nav-card"><i class="fas fa-lock"></i><h3>Nube Privada</h3></a>
+        <a href="#comunitaria" class="main-nav-card"><i class="fas fa-users"></i><h3>Nube Comunitaria</h3></a>
+        <a href="#referencias" class="main-nav-card"><i class="fas fa-book"></i><h3>Fuentes</h3></a>
+        <a href="#formulario" class="main-nav-card"><i class="fas fa-clipboard-check"></i><h3>Formulario</h3></a>
     </div>
 
-    <!-- CARRUSEL DE IMÁGENES -->
+    <!-- CARRUSEL -->
     <div class="section">
         <h2>📸 GALERÍA CLOUD COMPUTING</h2>
         <div class="carousel-container" id="carousel">
             <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800" alt="Cloud Servers" loading="lazy">
-                    <h3>Infraestructura Cloud Global</h3>
-                    <p>Centros de datos interconectados alrededor del mundo</p>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800" alt="Data Analysis" loading="lazy">
-                    <h3>Big Data & Analytics</h3>
-                    <p>Procesamiento masivo de datos en tiempo real</p>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=800" alt="Network" loading="lazy">
-                    <h3>Conectividad Global</h3>
-                    <p>Redes de alta velocidad para aplicaciones cloud</p>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800" alt="AI Cloud" loading="lazy">
-                    <h3>Inteligencia Artificial en la Nube</h3>
-                    <p>Modelos de ML y Deep Learning escalables</p>
-                </div>
+                <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600" alt="Cloud Servers" loading="lazy"><h3>Infraestructura Cloud Global</h3><p>Centros de datos interconectados</p></div>
+                <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600" alt="Data Analysis" loading="lazy"><h3>Big Data & Analytics</h3><p>Procesamiento masivo de datos</p></div>
+                <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600" alt="Network" loading="lazy"><h3>Conectividad Global</h3><p>Redes de alta velocidad cloud</p></div>
+                <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600" alt="AI Cloud" loading="lazy"><h3>IA en la Nube</h3><p>ML y Deep Learning escalables</p></div>
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel(-1)">◀</button>
             <button class="carousel-btn next" onclick="moveCarousel(1)">▶</button>
@@ -765,42 +676,13 @@
     <div class="section" id="hibrida">
         <h2>🔗 NUBE HÍBRIDA</h2>
         <div class="cards-grid">
-            <div class="info-card">
-                <i class="fas fa-arrows-alt-h"></i>
-                <h3>Definición</h3>
-                <div class="expandable-content">
-                    <p>La nube híbrida combina infraestructura de nube pública y privada, permitiendo que datos y aplicaciones se compartan entre ellas. Ofrece lo mejor de ambos mundos: la seguridad del entorno privado y la escalabilidad del público.</p>
-                </div>
-            </div>
-            <div class="info-card">
-                <i class="fas fa-cogs"></i>
-                <h3>Características</h3>
-                <div class="expandable-content">
-                    <ul>
-                        <li>Orquestación entre plataformas</li>
-                        <li>Portabilidad de cargas de trabajo</li>
-                        <li>Gestión unificada</li>
-                        <li>Bursting a nube pública</li>
-                        <li>Cumplimiento normativo flexible</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-card">
-                <i class="fas fa-building"></i>
-                <h3>Empresas que la usan</h3>
-                <div class="expandable-content">
-                    <p><strong>Netflix:</strong> Usa AWS para streaming y centros propios para contenido crítico.</p>
-                    <p><strong>Airbnb:</strong> Combina AWS con infraestructura privada para datos de usuarios.</p>
-                </div>
-            </div>
-            <div class="info-card">
-                <i class="fas fa-video"></i>
-                <h3>Video Explicativo</h3>
-                <div class="expandable-content">
-                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/Q9N7TaPiUV4" frameborder="0" allowfullscreen loading="lazy"></iframe>
-                    <p style="font-size:0.8rem; margin-top:0.5rem;">🎥 Cloud Computing explicado en español</p>
-                </div>
-            </div>
+            <div class="info-card"><i class="fas fa-arrows-alt-h"></i><h3>Definición</h3><div class="expandable-content"><p>Combina nube pública y privada, ofreciendo seguridad y escalabilidad.</p></div></div>
+            <div class="info-card"><i class="fas fa-cogs"></i><h3>Características</h3><div class="expandable-content"><ul><li>Orquestación entre plataformas</li><li>Portabilidad de cargas</li><li>Gestión unificada</li><li>Bursting a nube pública</li></ul></div></div>
+            <div class="info-card"><i class="fas fa-building"></i><h3>Empresas</h3><div class="expandable-content"><p><strong>Netflix:</strong> AWS + centros propios. <strong>Airbnb:</strong> AWS + infra privada.</p></div></div>
+            <div class="info-card"><i class="fas fa-video"></i><h3>Video Explicativo</h3><div class="expandable-content">
+                <iframe width="100%" height="180" src="https://www.youtube.com/embed/Q9N7TaPiUV4" frameborder="0" allowfullscreen loading="lazy"></iframe>
+                <p style="font-size:0.8rem;margin-top:0.5rem;">🎥 Cloud Computing explicado en español</p>
+            </div></div>
         </div>
     </div>
 
@@ -808,9 +690,9 @@
     <div class="section" id="publica">
         <h2>🌐 NUBE PÚBLICA</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-cloud-upload-alt"></i><h3>Definición</h3><div class="expandable-content"><p>Servicios de computación ofrecidos por proveedores externos a través de internet público. Recursos compartidos entre múltiples clientes (multi-tenant).</p></div></div>
-            <div class="info-card"><i class="fas fa-dollar-sign"></i><h3>Modelo de Pago</h3><div class="expandable-content"><p>Pay-as-you-go: Solo pagas por lo que consumes. Sin inversión inicial en hardware.</p></div></div>
-            <div class="info-card"><i class="fas fa-chart-bar"></i><h3>Estadísticas</h3><div class="expandable-content"><p>AWS: 32% del mercado. Azure: 23%. Google Cloud: 11%. Crecimiento anual del 20%.</p></div></div>
+            <div class="info-card"><i class="fas fa-cloud-upload-alt"></i><h3>Definición</h3><div class="expandable-content"><p>Servicios de computación ofrecidos por proveedores externos a través de internet.</p></div></div>
+            <div class="info-card"><i class="fas fa-dollar-sign"></i><h3>Modelo de Pago</h3><div class="expandable-content"><p>Pay-as-you-go: pagas solo por lo que consumes.</p></div></div>
+            <div class="info-card"><i class="fas fa-chart-bar"></i><h3>Estadísticas</h3><div class="expandable-content"><p>AWS: 32% | Azure: 23% | Google: 11%</p></div></div>
         </div>
     </div>
 
@@ -818,8 +700,8 @@
     <div class="section" id="privada">
         <h2>🔒 NUBE PRIVADA</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-shield-haltered"></i><h3>Definición</h3><div class="expandable-content"><p>Infraestructura cloud dedicada exclusivamente a una organización. On-premise o alojada por tercero.</p></div></div>
-            <div class="info-card"><i class="fas fa-check-circle"></i><h3>Ventajas</h3><div class="expandable-content"><ul><li>Control total sobre datos</li><li>Cumplimiento regulatorio</li><li>Rendimiento predecible</li><li>Personalización completa</li></ul></div></div>
+            <div class="info-card"><i class="fas fa-shield-haltered"></i><h3>Definición</h3><div class="expandable-content"><p>Infraestructura dedicada a una organización. On-premise o alojada.</p></div></div>
+            <div class="info-card"><i class="fas fa-check-circle"></i><h3>Ventajas</h3><div class="expandable-content"><ul><li>Control total de datos</li><li>Cumplimiento regulatorio</li><li>Rendimiento predecible</li></ul></div></div>
         </div>
     </div>
 
@@ -827,171 +709,140 @@
     <div class="section" id="comunitaria">
         <h2>👥 NUBE COMUNITARIA</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-handshake"></i><h3>Definición</h3><div class="expandable-content"><p>Infraestructura compartida por organizaciones con intereses comunes (misión, seguridad, cumplimiento).</p></div></div>
-            <div class="info-card"><i class="fas fa-hospital"></i><h3>Ejemplos</h3><div class="expandable-content"><p><strong>Healthcare Cloud:</strong> Hospitales comparten infraestructura HIPAA. <strong>GovCloud:</strong> Agencias gubernamentales.</p></div></div>
+            <div class="info-card"><i class="fas fa-handshake"></i><h3>Definición</h3><div class="expandable-content"><p>Infraestructura compartida por organizaciones con intereses comunes.</p></div></div>
+            <div class="info-card"><i class="fas fa-hospital"></i><h3>Ejemplos</h3><div class="expandable-content"><p><strong>Healthcare Cloud:</strong> Hospitales. <strong>GovCloud:</strong> Gobierno.</p></div></div>
         </div>
     </div>
 
     <!-- USOS -->
     <div class="section" id="usos">
-        <h2>💡 USOS DE LA INFORMÁTICA EN LA NUBE</h2>
+        <h2>💡 USOS DE LA NUBE</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-database"></i><h3>Almacenamiento</h3><div class="expandable-content"><p>Google Drive, Dropbox, OneDrive. Backup automático, sincronización multi-dispositivo.</p></div></div>
-            <div class="info-card"><i class="fas fa-code"></i><h3>Desarrollo</h3><div class="expandable-content"><p>GitHub Codespaces, AWS Cloud9. CI/CD con GitHub Actions, Jenkins.</p></div></div>
-            <div class="info-card"><i class="fas fa-brain"></i><h3>IA & ML</h3><div class="expandable-content"><p>Entrenamiento con GPU/TPU. AWS SageMaker, Google Vertex AI.</p></div></div>
-            <div class="info-card"><i class="fas fa-gamepad"></i><h3>Gaming</h3><div class="expandable-content"><p>Xbox Cloud Gaming, GeForce Now. Juegos AAA sin hardware potente.</p></div></div>
-            <div class="info-card"><i class="fas fa-video"></i><h3>Streaming</h3><div class="expandable-content"><p>Netflix usa AWS. YouTube procesa 500h de video por minuto.</p></div></div>
-            <div class="info-card"><i class="fas fa-robot"></i><h3>IoT</h3><div class="expandable-content"><p>AWS IoT Core, Azure IoT Hub. Millones de dispositivos conectados.</p></div></div>
+            <div class="info-card"><i class="fas fa-database"></i><h3>Almacenamiento</h3><div class="expandable-content"><p>Google Drive, Dropbox, OneDrive.</p></div></div>
+            <div class="info-card"><i class="fas fa-code"></i><h3>Desarrollo</h3><div class="expandable-content"><p>GitHub Codespaces, AWS Cloud9.</p></div></div>
+            <div class="info-card"><i class="fas fa-brain"></i><h3>IA & ML</h3><div class="expandable-content"><p>SageMaker, Vertex AI con GPU/TPU.</p></div></div>
+            <div class="info-card"><i class="fas fa-gamepad"></i><h3>Gaming</h3><div class="expandable-content"><p>Xbox Cloud, GeForce Now.</p></div></div>
+            <div class="info-card"><i class="fas fa-video"></i><h3>Streaming</h3><div class="expandable-content"><p>Netflix, YouTube en AWS.</p></div></div>
+            <div class="info-card"><i class="fas fa-robot"></i><h3>IoT</h3><div class="expandable-content"><p>Millones de dispositivos conectados.</p></div></div>
         </div>
     </div>
 
     <!-- VENTAJAS -->
     <div class="section" id="ventajas">
-        <h2>⭐ PRINCIPALES VENTAJAS</h2>
+        <h2>⭐ VENTAJAS</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-coins"></i><h3>Reducción de Costos</h3><div class="expandable-content"><p>Sin inversión en hardware. Pago por uso. Ahorro del 30-50%.</p></div></div>
-            <div class="info-card"><i class="fas fa-expand-arrows-alt"></i><h3>Escalabilidad</h3><div class="expandable-content"><p>Auto-scaling según demanda. Soporta picos de tráfico.</p></div></div>
-            <div class="info-card"><i class="fas fa-globe"></i><h3>Accesibilidad Global</h3><div class="expandable-content"><p>Acceso desde cualquier lugar. CDN para entrega rápida mundial.</p></div></div>
-            <div class="info-card"><i class="fas fa-sync-alt"></i><h3>Recuperación de Desastres</h3><div class="expandable-content"><p>Backup multi-región. RTO/RPO mínimos. Continuidad de negocio.</p></div></div>
+            <div class="info-card"><i class="fas fa-coins"></i><h3>Costos</h3><div class="expandable-content"><p>Sin hardware. Pago por uso.</p></div></div>
+            <div class="info-card"><i class="fas fa-expand-arrows-alt"></i><h3>Escalabilidad</h3><div class="expandable-content"><p>Auto-scaling en minutos.</p></div></div>
+            <div class="info-card"><i class="fas fa-globe"></i><h3>Accesibilidad</h3><div class="expandable-content"><p>Desde cualquier lugar.</p></div></div>
+            <div class="info-card"><i class="fas fa-sync-alt"></i><h3>Recuperación</h3><div class="expandable-content"><p>Backup multi-región.</p></div></div>
         </div>
     </div>
 
     <!-- PROVEEDOR -->
     <div class="section" id="proveedor">
-        <h2>🏢 ¿CÓMO ELEGIR UN PROVEEDOR?</h2>
+        <h2>🏢 ELEGIR PROVEEDOR</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-certificate"></i><h3>Certificaciones</h3><div class="expandable-content"><p>ISO 27001, SOC 2, HIPAA, GDPR, PCI-DSS.</p></div></div>
-            <div class="info-card"><i class="fas fa-clock"></i><h3>SLA y Uptime</h3><div class="expandable-content"><p>AWS: 99.99%. Azure: 99.95%. Google Cloud: 99.99%.</p></div></div>
-            <div class="info-card"><i class="fas fa-map-marker-alt"></i><h3>Regiones</h3><div class="expandable-content"><p>AWS: 32. Azure: 60+. Google Cloud: 40 regiones.</p></div></div>
-            <div class="info-card"><i class="fas fa-calculator"></i><h3>Precios</h3><div class="expandable-content"><p>Calculadoras oficiales para comparar costos.</p></div></div>
-            <div class="info-card"><i class="fas fa-headset"></i><h3>Soporte</h3><div class="expandable-content"><p>Basic, Developer, Business, Enterprise. Español disponible.</p></div></div>
-            <div class="info-card"><i class="fas fa-plug"></i><h3>Ecosistema</h3><div class="expandable-content"><p>Integraciones, marketplace, documentación, SDKs.</p></div></div>
+            <div class="info-card"><i class="fas fa-certificate"></i><h3>Certificaciones</h3><div class="expandable-content"><p>ISO 27001, SOC 2, HIPAA.</p></div></div>
+            <div class="info-card"><i class="fas fa-clock"></i><h3>SLA</h3><div class="expandable-content"><p>99.95% - 99.99% uptime.</p></div></div>
+            <div class="info-card"><i class="fas fa-map-marker-alt"></i><h3>Regiones</h3><div class="expandable-content"><p>32-60+ regiones globales.</p></div></div>
+            <div class="info-card"><i class="fas fa-calculator"></i><h3>Precios</h3><div class="expandable-content"><p>Calculadoras oficiales.</p></div></div>
+            <div class="info-card"><i class="fas fa-headset"></i><h3>Soporte</h3><div class="expandable-content"><p>24/7 en español.</p></div></div>
+            <div class="info-card"><i class="fas fa-plug"></i><h3>Ecosistema</h3><div class="expandable-content"><p>SDKs, marketplace.</p></div></div>
         </div>
     </div>
 
     <!-- 10 TÉRMINOS -->
     <div class="section" id="terminos">
-        <h2>📚 10 TÉRMINOS DE INFORMÁTICA EN LA NUBE</h2>
+        <h2>📚 10 TÉRMINOS</h2>
         <div class="cards-grid">
-            <div class="info-card"><i class="fas fa-server"></i><h3>1. IaaS</h3><div class="expandable-content"><p>Infraestructura como Servicio. Ej: AWS EC2.</p></div></div>
-            <div class="info-card"><i class="fas fa-layer-group"></i><h3>2. PaaS</h3><div class="expandable-content"><p>Plataforma como Servicio. Ej: Heroku.</p></div></div>
-            <div class="info-card"><i class="fas fa-window-maximize"></i><h3>3. SaaS</h3><div class="expandable-content"><p>Software como Servicio. Ej: Google Workspace.</p></div></div>
+            <div class="info-card"><i class="fas fa-server"></i><h3>1. IaaS</h3><div class="expandable-content"><p>Infraestructura como Servicio. AWS EC2.</p></div></div>
+            <div class="info-card"><i class="fas fa-layer-group"></i><h3>2. PaaS</h3><div class="expandable-content"><p>Plataforma como Servicio. Heroku.</p></div></div>
+            <div class="info-card"><i class="fas fa-window-maximize"></i><h3>3. SaaS</h3><div class="expandable-content"><p>Software como Servicio. Google Workspace.</p></div></div>
             <div class="info-card"><i class="fas fa-dharmachakra"></i><h3>4. Kubernetes</h3><div class="expandable-content"><p>Orquestador de contenedores.</p></div></div>
-            <div class="info-card"><i class="fas fa-box"></i><h3>5. Docker</h3><div class="expandable-content"><p>Apps en contenedores portables.</p></div></div>
+            <div class="info-card"><i class="fas fa-box"></i><h3>5. Docker</h3><div class="expandable-content"><p>Contenedores portables.</p></div></div>
             <div class="info-card"><i class="fas fa-exchange-alt"></i><h3>6. API Gateway</h3><div class="expandable-content"><p>Entrada única para APIs.</p></div></div>
             <div class="info-card"><i class="fas fa-balance-scale"></i><h3>7. Load Balancer</h3><div class="expandable-content"><p>Distribución de tráfico.</p></div></div>
-            <div class="info-card"><i class="fas fa-network-wired"></i><h3>8. CDN</h3><div class="expandable-content"><p>Content Delivery Network. Ej: CloudFront.</p></div></div>
-            <div class="info-card"><i class="fas fa-infinity"></i><h3>9. Serverless</h3><div class="expandable-content"><p>Ejecución sin servidores. Ej: AWS Lambda.</p></div></div>
-            <div class="info-card"><i class="fas fa-project-diagram"></i><h3>10. Microservicios</h3><div class="expandable-content"><p>Arquitectura de servicios independientes.</p></div></div>
+            <div class="info-card"><i class="fas fa-network-wired"></i><h3>8. CDN</h3><div class="expandable-content"><p>Content Delivery Network.</p></div></div>
+            <div class="info-card"><i class="fas fa-infinity"></i><h3>9. Serverless</h3><div class="expandable-content"><p>Ejecución sin servidores. Lambda.</p></div></div>
+            <div class="info-card"><i class="fas fa-project-diagram"></i><h3>10. Microservicios</h3><div class="expandable-content"><p>Servicios independientes.</p></div></div>
         </div>
     </div>
 
     <!-- MAPA -->
     <div class="section" id="mapa">
-        <h2>🗺️ REGIONES DE CLOUD MUNDIALES</h2>
+        <h2>🗺️ REGIONES CLOUD</h2>
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28349574.613515444!2d-99.5!3d35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDAwJzAwLjAiTiA5OcKwMzAnMDAuMCJX!5e0!3m2!1ses!2smx!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
         </div>
-        <p style="text-align:center; color:var(--cyan); margin-top:1rem;">AWS | Azure | Google Cloud | Regiones globales</p>
     </div>
 
     <!-- FORMULARIO -->
     <div class="section" id="formulario">
-        <h2>📋 FORMULARIO DE EXPERIENCIA EN NAVEGACIÓN</h2>
+        <h2>📋 FORMULARIO</h2>
         <div class="form-container">
             <a href="https://forms.gle/MTkN4UJJ4RCcLYaW7" target="_blank" class="forms-link-btn">
-                <i class="fas fa-external-link-alt"></i> Ir al Formulario de Experiencia
+                <i class="fas fa-external-link-alt"></i> Ir al Formulario
             </a>
-            <p style="color:var(--cyan); margin-top:1.5rem;">Haz clic en el botón para acceder al formulario de Google Forms</p>
         </div>
     </div>
 
     <!-- REFERENCIAS -->
     <div class="section" id="referencias">
-        <h2>📖 REFERENCIAS BIBLIOGRÁFICAS</h2>
+        <h2>📖 REFERENCIAS</h2>
         <div class="cards-grid">
-            <div class="info-card">
-                <i class="fas fa-globe"></i>
-                <h3>Sitios Web Oficiales</h3>
-                <div class="expandable-content">
-                    <ul>
-                        <li><a href="https://aws.amazon.com/es/what-is-cloud-computing/" target="_blank" style="color:var(--cyan);">AWS - Cloud Computing</a></li>
-                        <li><a href="https://azure.microsoft.com/es-es/" target="_blank" style="color:var(--cyan);">Microsoft Azure</a></li>
-                        <li><a href="https://cloud.google.com/?hl=es" target="_blank" style="color:var(--cyan);">Google Cloud</a></li>
-                        <li><a href="https://www.ibm.com/mx-es/cloud" target="_blank" style="color:var(--cyan);">IBM Cloud</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="info-card">
-                <i class="fas fa-newspaper"></i>
-                <h3>Documentación Técnica</h3>
-                <div class="expandable-content">
-                    <ul>
-                        <li><a href="https://docs.aws.amazon.com/" target="_blank" style="color:var(--cyan);">Documentación AWS</a></li>
-                        <li><a href="https://learn.microsoft.com/es-es/azure/" target="_blank" style="color:var(--cyan);">Documentación Azure</a></li>
-                        <li><a href="https://cloud.google.com/docs?hl=es" target="_blank" style="color:var(--cyan);">Documentación Google Cloud</a></li>
-                    </ul>
-                </div>
-            </div>
+            <div class="info-card"><i class="fas fa-globe"></i><h3>Sitios Web</h3><div class="expandable-content"><ul>
+                <li><a href="https://aws.amazon.com/es/" target="_blank" style="color:var(--cyan);">AWS</a></li>
+                <li><a href="https://azure.microsoft.com/es-es/" target="_blank" style="color:var(--cyan);">Azure</a></li>
+                <li><a href="https://cloud.google.com/?hl=es" target="_blank" style="color:var(--cyan);">Google Cloud</a></li>
+            </ul></div></div>
+            <div class="info-card"><i class="fas fa-newspaper"></i><h3>Documentación</h3><div class="expandable-content"><ul>
+                <li><a href="https://docs.aws.amazon.com/" target="_blank" style="color:var(--cyan);">AWS Docs</a></li>
+                <li><a href="https://learn.microsoft.com/es-es/azure/" target="_blank" style="color:var(--cyan);">Azure Docs</a></li>
+                <li><a href="https://cloud.google.com/docs?hl=es" target="_blank" style="color:var(--cyan);">Google Cloud Docs</a></li>
+            </ul></div></div>
         </div>
     </div>
 
-    <!-- CRÉDITOS -->
+    <!-- CRÉDITOS CON BÚHO ESTUDIOSO -->
     <div class="credits-section">
+        <div class="owl-icon">🦉📚</div>
         <div class="credit-name">Erick Esquivel Mendoza</div>
+        <div class="credit-group">4A Ofimática</div>
         <div class="credit-name">Melissa Bermúdez Ramírez</div>
-        <div class="school-name">CBTa 181</div>
-        <p style="color:var(--cyan); margin-top:1rem; font-family:'Rajdhani',sans-serif;">🌿 Verde Bandera & Azul Tecnología 🌿</p>
+        <div class="credit-group">4A Ofimática</div>
+        <div class="school-name">🦉 CBTa 181 🦉</div>
     </div>
 </div>
 
 <script>
-    // ===== CARGAR IMÁGENES EN EL ENCABEZADO =====
-    function loadLogo(event, previewId) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.getElementById(previewId);
-                img.src = e.target.result;
-                img.style.display = 'block';
-                const placeholder = img.parentElement;
-                const icon = placeholder.querySelector('i');
-                if(icon) icon.style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    // ===== GENERAR RAYOS DE LUZ =====
     function generateRays() {
         const container = document.getElementById('techRays');
-        for(let i = 0; i < 15; i++) {
+        const count = window.innerWidth < 768 ? 5 : 8;
+        for(let i = 0; i < count; i++) {
             const ray = document.createElement('div');
             ray.className = 'tech-ray';
-            ray.style.left = (i * 7) + '%';
-            ray.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            ray.style.left = (i * (100/count) + Math.random() * 5) + '%';
+            ray.style.animationDuration = (Math.random() * 6 + 8) + 's';
             ray.style.animationDelay = -(Math.random() * 5) + 's';
             container.appendChild(ray);
         }
     }
 
-    // ===== GENERAR PARTÍCULAS =====
     function generateParticles() {
         const container = document.getElementById('particlesBg');
-        for(let i = 0; i < 50; i++) {
+        const count = window.innerWidth < 768 ? 18 : 30;
+        for(let i = 0; i < count; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.width = (Math.random() * 4 + 2) + 'px';
             particle.style.height = particle.style.width;
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 12 + 8) + 's';
-            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            particle.style.animationDelay = Math.random() * 8 + 's';
             container.appendChild(particle);
         }
     }
 
-    // ===== CARRUSEL =====
     let currentSlide = 0;
     const totalSlides = 4;
     function moveCarousel(direction) {
@@ -1000,12 +851,10 @@
     }
     setInterval(() => moveCarousel(1), 5000);
 
-    // ===== EXPANSIÓN DE TARJETAS (SOLO UNA A LA VEZ) =====
     document.querySelectorAll('.info-card').forEach(card => {
         const expandDiv = card.querySelector('.expandable-content');
         if(!expandDiv) return;
         expandDiv.classList.remove('show');
-        
         card.addEventListener('click', (e) => {
             e.stopPropagation();
             document.querySelectorAll('.expandable-content.show').forEach(el => {
@@ -1015,25 +864,20 @@
         });
     });
 
-    // ===== CERRAR AL HACER CLIC FUERA =====
     document.addEventListener('click', (e) => {
         if(!e.target.closest('.info-card')) {
             document.querySelectorAll('.expandable-content.show').forEach(el => el.classList.remove('show'));
         }
     });
 
-    // ===== NAVEGACIÓN SUAVE =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            if(target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
 
-    // ===== INICIALIZACIÓN =====
     generateRays();
     generateParticles();
 </script>
